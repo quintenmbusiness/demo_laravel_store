@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Http\Requests\Product\DeleteRoleRequest;
-use App\Http\Requests\Product\IndexRoleRequest;
-use App\Http\Requests\Product\ShowRoleRequest;
-use App\Http\Requests\Product\StoreRoleRequest;
-use App\Http\Requests\Product\UpdateRoleRequest;
+use App\Http\Requests\User\Role\DeleteRoleRequest;
+use App\Http\Requests\User\Role\IndexRoleRequest;
+use App\Http\Requests\User\Role\ShowRoleRequest;
+use App\Http\Requests\User\Role\StoreRoleRequest;
+use App\Http\Requests\User\Role\UpdateRoleRequest;
 use App\Models\User\Role;
 use App\Services\User\RoleService;
 use Illuminate\Database\Eloquent\Collection;

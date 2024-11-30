@@ -4,7 +4,7 @@
         <nav>
             <ul class="flex space-x-6">
                 <li><a href="{{ url('/') }}" class="hover:underline">Home</a></li>
-                <li><a href="{{ url('/shop') }}" class="hover:underline">Shop</a></li>
+                <li><a href="{{ url('/products') }}" class="hover:underline">Shop</a></li>
                 <li><a href="{{ url('/about') }}" class="hover:underline">About Us</a></li>
                 <li><a href="{{ url('/contact') }}" class="hover:underline">Contact</a></li>
             </ul>

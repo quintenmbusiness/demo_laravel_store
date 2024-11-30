@@ -2,11 +2,10 @@
 
 namespace App\Popo\User;
 
-class CartPopo
+class CartItemPopo
 {
     public function __construct(
-        public string $session_id,
-        public int|null $user_id,
+        public int|null $cart_id,
         public int|null $product_id,
         public int|null $quantity,
     ) {

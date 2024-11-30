@@ -2,15 +2,14 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Http\Requests\User\Cart\DeleteCartRequest;
-use App\Http\Requests\User\Cart\IndexCartRequest;
-use App\Http\Requests\User\Cart\ShowCartRequest;
-use App\Http\Requests\User\Cart\StoreCartRequest;
-use App\Http\Requests\User\Cart\UpdateCartRequest;
+use App\Http\Requests\User\Cart\AddItemToCartRequest;
+use App\Http\Requests\User\Cart\ClearCartRequest;
+use App\Http\Requests\User\Cart\RemoveItemFromCartRequest;
+use App\Http\Requests\User\Cart\ViewCartRequest;
 use App\Models\User\Cart;
 use App\Services\User\CartService;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Session;
 
 class CartController extends Controller
 {
@@ -28,50 +27,48 @@ class CartController extends Controller
     }
 
     /**
-     * @param IndexCartRequest $request
-     * @return Collection
-     */
-    public function index(IndexCartRequest $request): Collection
-    {
-        return $this->cartService->index();
-    }
-
-    /**
-     * @param ShowCartRequest $request
-     * @param Cart $cart
+     * View the current cart items.
+     *
+     * @param ViewCartRequest $request
      * @return Cart
      */
-    public function show(ShowCartRequest $request, Cart $cart): Cart
+    public function viewCartItems(ViewCartRequest $request): Cart
     {
-        return $this->cartService->show($cart);
+        $sessionId = Session::getId();
+
+        return $this->cartService->viewCartItems($sessionId);
     }
 
     /**
-     * @param UpdateCartRequest $request
-     * @param Cart $cart
+     * @param ClearCartRequest $request
      * @return Cart
      */
-    public function update(UpdateCartRequest $request, Cart $cart): Cart
+    public function clearCart(ClearCartRequest $request): Cart
     {
-        return $this->cartService->update($request->toPopo(), $cart);
+        $sessionId = Session::getId();
+
+        return $this->cartService->clearCart($sessionId);
     }
 
     /**
-     * @param DeleteCartRequest $request
-     * @param Cart $cart
+     * @param RemoveItemFromCartRequest $request
      * @return bool
      */
-    public function delete(DeleteCartRequest $request, Cart $cart): bool
+    public function removeCartItem(RemoveItemFromCartRequest $request): bool
     {
-        return $this->cartService->delete($cart);
+        $sessionId = Session::getId();
+
+        return $this->cartService->removeCartItem($request->toPopo(), $sessionId);
     }
 
     /**
-     * @param  StoreCartRequest $request
+     * @param  AddItemToCartRequest $request
      * @return Cart
      */
-    public function store(StoreCartRequest $request): Cart
+    public function addCartItem(AddItemToCartRequest $request): Cart
     {
-        return $this->cartService->store($request->toPopo());
+        $sessionId = Session::getId();
+
+        return $this->cartService->addCartItem($request->toPopo(), $sessionId);
     }
 }

@@ -14,7 +14,14 @@ class Cart extends Model
     /**
      * @inheritdoc
      */
-    protected $fillable = ['user_id'];
+    protected $fillable = [
+        'session_id',
+        'user_id'
+    ];
+
+    protected $with = [
+        'items'
+    ];
 
     /**
      * @return HasMany<CartItem, Cart>
