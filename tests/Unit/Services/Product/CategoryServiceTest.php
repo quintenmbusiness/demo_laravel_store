@@ -74,7 +74,7 @@ class CategoryServiceTest extends TestCase
         $this->assertEquals($this->category->name, $updatedCategory->name);
     }
 
-    public function testDelete()
+    public function test_delete_method()
     {
         $result = $this->categoryService->delete($this->category);
 
@@ -82,7 +82,7 @@ class CategoryServiceTest extends TestCase
         $this->assertNull(Category::find($this->category->id));
     }
 
-    public function testStore()
+    public function test_store_method()
     {
         $category = $this->categoryService->store($this->categoryPopo);
 

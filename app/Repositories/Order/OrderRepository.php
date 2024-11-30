@@ -43,10 +43,9 @@ class OrderRepository
     {
         $order->update(
             [
-                'name'        => $orderPopo->name,
-                'price'       => $orderPopo->price,
-                'stock'       => $orderPopo->stock,
-                'category_id' => $orderPopo->category_id,
+                'user_id'        => $orderPopo->user_id,
+                'status'       => $orderPopo->status,
+                'total'       => $orderPopo->total,
             ]
         );
 
@@ -61,10 +60,9 @@ class OrderRepository
     {
         return Order::create(
             [
-                'name'        => $orderPopo->name,
-                'price'       => $orderPopo->price,
-                'stock'       => $orderPopo->stock,
-                'category_id' => $orderPopo->category_id,
+                'user_id'        => $orderPopo->user_id,
+                'status'       => $orderPopo->status,
+                'total'       => $orderPopo->total,
             ]
         );
     }

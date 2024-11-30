@@ -49,7 +49,7 @@ class OrderServiceTest extends TestCase
         $this->order = Order::factory()->create();
 
         $this->user = User::factory()->create();
-        $this->orderPopo = new OrderPopo($this->user->id);
+        $this->orderPopo = new OrderPopo($this->user->id, 100, "COMPLETED");
     }
 
     public function test_index_method()
@@ -76,7 +76,7 @@ class OrderServiceTest extends TestCase
         $this->assertEquals($this->orderPopo->status, $updatedOrder->status);
     }
 
-    public function testDelete()
+    public function test_delete_method()
     {
         $result = $this->orderService->delete($this->order);
 
@@ -84,7 +84,7 @@ class OrderServiceTest extends TestCase
         $this->assertNull(Order::find($this->order->id));
     }
 
-    public function testStore()
+    public function test_store_method()
     {
         $order = $this->orderService->store($this->orderPopo);
 

@@ -2,11 +2,11 @@
 
 namespace Repositories\User;
 
+use App\Models\Product\Product;
 use App\Models\User\Review;
 use App\Models\User\User;
 use App\Popo\User\ReviewPopo;
 use App\Repositories\User\ReviewRepository;
-use App\Services\User\ReviewService;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -31,6 +31,11 @@ class ReviewRepositoryTest extends TestCase
     private User $user;
 
     /**
+     * @var Product $product
+     */
+    private Product $product;
+
+    /**
      * @var Review
      */
     private Review $review;
@@ -42,8 +47,15 @@ class ReviewRepositoryTest extends TestCase
         $this->reviewRepository = new ReviewRepository();
         $this->review = Review::factory()->create();
 
+        $this->product = Product::factory()->create();
         $this->user = User::factory()->create();
-        $this->reviewPopo = new ReviewPopo($this->user->id);
+
+        $this->reviewPopo = new ReviewPopo(
+            $this->product->id,
+            $this->user->id,
+            5,
+            'great product'
+        );
     }
 
     public function test_index_method()
@@ -65,10 +77,13 @@ class ReviewRepositoryTest extends TestCase
     {
         $updatedReview = $this->reviewRepository->update($this->reviewPopo, $this->review);
 
-        $this->assertEquals($this->user->id, $updatedReview->user_id);
+        $this->assertEquals($this->review->product_id, $updatedReview->product_id);
+        $this->assertEquals($this->review->user_id, $updatedReview->user_id);
+        $this->assertEquals($this->review->rating, $updatedReview->rating);
+        $this->assertEquals($this->review->comment, $updatedReview->comment);
     }
 
-    public function testDelete()
+    public function test_delete_method()
     {
         $result = $this->reviewRepository->delete($this->review);
 
@@ -76,11 +91,14 @@ class ReviewRepositoryTest extends TestCase
         $this->assertNull(Review::find($this->review->id));
     }
 
-    public function testStore()
+    public function test_store_method()
     {
         $review = $this->reviewRepository->store($this->reviewPopo);
 
         $this->assertInstanceOf(Review::class, $review);
-        $this->assertEquals($this->user->id, $review->user_id);
+        $this->assertEquals($this->reviewPopo->product_id, $review->product_id);
+        $this->assertEquals($this->reviewPopo->user_id, $review->user_id);
+        $this->assertEquals($this->reviewPopo->rating, $review->rating);
+        $this->assertEquals($this->reviewPopo->comment, $review->comment);
     }
 }

@@ -70,7 +70,7 @@ class OrderRepositoryTest extends TestCase
         $this->assertEquals($this->orderPopo->status, $updatedOrder->status);
     }
 
-    public function testDelete()
+    public function test_delete_method()
     {
         $result = $this->orderRepository->delete($this->order);
 
@@ -78,7 +78,7 @@ class OrderRepositoryTest extends TestCase
         $this->assertNull(Order::find($this->order->id));
     }
 
-    public function testStore()
+    public function test_store_method()
     {
         $order = $this->orderRepository->store($this->orderPopo);
 

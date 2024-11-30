@@ -46,6 +46,7 @@ class ProductRepository
                 'name'        => $productPopo->name,
                 'price'       => $productPopo->price,
                 'stock'       => $productPopo->stock,
+                'description' => $productPopo->description,
                 'category_id' => $productPopo->category_id,
             ]
         );
@@ -64,6 +65,7 @@ class ProductRepository
                 'name'        => $productPopo->name,
                 'price'       => $productPopo->price,
                 'stock'       => $productPopo->stock,
+                'description' => $productPopo->description,
                 'category_id' => $productPopo->category_id,
             ]
         );

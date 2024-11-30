@@ -62,7 +62,7 @@ class CategoryRepositoryTest extends TestCase
         $this->assertEquals($this->category->name, $updatedCategory->name);
     }
 
-    public function testDelete()
+    public function test_delete_method()
     {
         $result = $this->categoryRepository->delete($this->category);
 
@@ -70,7 +70,7 @@ class CategoryRepositoryTest extends TestCase
         $this->assertNull(Category::find($this->category->id));
     }
 
-    public function testStore()
+    public function test_store_method()
     {
         $category = $this->categoryRepository->store($this->categoryPopo);
 

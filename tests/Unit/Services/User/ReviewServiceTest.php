@@ -2,6 +2,7 @@
 
 namespace Services\User;
 
+use App\Models\Product\Product;
 use App\Models\User\Review;
 use App\Models\User\User;
 use App\Popo\User\ReviewPopo;
@@ -48,8 +49,15 @@ class ReviewServiceTest extends TestCase
         $this->reviewService = new ReviewService($this->reviewRepository);
         $this->review = Review::factory()->create();
 
+        $this->product = Product::factory()->create();
         $this->user = User::factory()->create();
-        $this->reviewPopo = new ReviewPopo($this->user->id);
+
+        $this->reviewPopo = new ReviewPopo(
+            $this->product->id,
+            $this->user->id,
+            5,
+            'great product'
+        );
     }
 
     public function test_index_method()
@@ -71,10 +79,13 @@ class ReviewServiceTest extends TestCase
     {
         $updatedReview = $this->reviewService->update($this->reviewPopo, $this->review);
 
-        $this->assertEquals($this->user->id, $updatedReview->user_id);
+        $this->assertEquals($this->review->product_id, $updatedReview->product_id);
+        $this->assertEquals($this->review->user_id, $updatedReview->user_id);
+        $this->assertEquals($this->review->rating, $updatedReview->rating);
+        $this->assertEquals($this->review->comment, $updatedReview->comment);
     }
 
-    public function testDelete()
+    public function test_delete_method()
     {
         $result = $this->reviewService->delete($this->review);
 
@@ -82,11 +93,14 @@ class ReviewServiceTest extends TestCase
         $this->assertNull(Review::find($this->review->id));
     }
 
-    public function testStore()
+    public function test_store_method()
     {
         $review = $this->reviewService->store($this->reviewPopo);
 
         $this->assertInstanceOf(Review::class, $review);
-        $this->assertEquals($this->user->id, $review->user_id);
+        $this->assertEquals($this->reviewPopo->product_id, $review->product_id);
+        $this->assertEquals($this->reviewPopo->user_id, $review->user_id);
+        $this->assertEquals($this->reviewPopo->rating, $review->rating);
+        $this->assertEquals($this->reviewPopo->comment, $review->comment);
     }
 }

@@ -48,7 +48,6 @@ class ProductRepositoryTest extends TestCase
             100,
             100,
             $this->category->id
-
         );
     }
 
@@ -73,13 +72,13 @@ class ProductRepositoryTest extends TestCase
 
         $this->assertEquals($this->product->id, $updatedProduct->id);
         $this->assertEquals($this->product->name, $updatedProduct->name);
-        $this->assertEquals($this->product->description, $updatedProduct->description);
         $this->assertEquals($this->product->price, $updatedProduct->price);
         $this->assertEquals($this->product->stock, $updatedProduct->stock);
+        $this->assertEquals($this->product->description, $updatedProduct->description);
         $this->assertEquals($this->product->category(), $updatedProduct->category());
     }
 
-    public function testDelete()
+    public function test_delete_method()
     {
         $result = $this->productRepository->delete($this->product);
 
@@ -87,15 +86,15 @@ class ProductRepositoryTest extends TestCase
         $this->assertNull(Product::find($this->product->id));
     }
 
-    public function testStore()
+    public function test_store_method()
     {
         $product = $this->productRepository->store($this->productPopo);
 
         $this->assertInstanceOf(Product::class, $product);
         $this->assertEquals($this->productPopo->name, $product->name);
-        $this->assertEquals($this->productPopo->description, $product->description);
         $this->assertEquals($this->productPopo->price, $product->price);
         $this->assertEquals($this->productPopo->stock, $product->stock);
+        $this->assertEquals($this->productPopo->description, $product->description);
         $this->assertEquals($this->productPopo->category_id, $product->category_id);
     }
 }

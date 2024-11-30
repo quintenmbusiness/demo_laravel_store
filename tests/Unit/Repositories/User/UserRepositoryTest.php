@@ -5,7 +5,6 @@ namespace Repositories\User;
 use App\Models\User\User;
 use App\Popo\User\UserPopo;
 use App\Repositories\User\UserRepository;
-use App\Services\User\UserService;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -36,8 +35,11 @@ class UserRepositoryTest extends TestCase
         $this->userRepository = new UserRepository();
         $this->user = User::factory()->create();
 
-        $this->user = User::factory()->create();
-        $this->userPopo = new UserPopo($this->user->id);
+        $this->userPopo = new UserPopo(
+            'quinten',
+            'quintenmbusiness@gmail.com',
+            null
+        );
     }
 
     public function test_index_method()
@@ -59,10 +61,12 @@ class UserRepositoryTest extends TestCase
     {
         $updatedUser = $this->userRepository->update($this->userPopo, $this->user);
 
-        $this->assertEquals($this->user->id, $updatedUser->user_id);
+        $this->assertEquals($this->user->name, $updatedUser->name);
+        $this->assertEquals($this->user->email, $updatedUser->email);
+        $this->assertEquals($this->user->email_verified_at, $updatedUser->email_verified_at);
     }
 
-    public function testDelete()
+    public function test_delete_method()
     {
         $result = $this->userRepository->delete($this->user);
 
@@ -70,11 +74,13 @@ class UserRepositoryTest extends TestCase
         $this->assertNull(User::find($this->user->id));
     }
 
-    public function testStore()
+    public function test_store_method()
     {
         $user = $this->userRepository->store($this->userPopo);
 
         $this->assertInstanceOf(User::class, $user);
-        $this->assertEquals($this->user->id, $user->user_id);
+        $this->assertEquals($this->user->name, $user->name);
+        $this->assertEquals($this->user->email, $user->email);
+        $this->assertEquals($this->user->email_verified_at, $user->email_verified_at);
     }
 }

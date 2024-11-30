@@ -2,6 +2,7 @@
 
 namespace Services\Product;
 
+use App\Models\Product\Category;
 use App\Models\Product\Product;
 use App\Models\User\User;
 use App\Popo\Product\ProductPopo;
@@ -36,6 +37,11 @@ class ProductServiceTest extends TestCase
     private Product $product;
 
     /**
+     * @var Category
+     */
+    private Category $category;
+
+    /**
      * @var ProductService $productService
      */
     private ProductService $productService;
@@ -47,9 +53,16 @@ class ProductServiceTest extends TestCase
         $this->productRepository = new ProductRepository();
         $this->productService = new ProductService($this->productRepository);
         $this->product = Product::factory()->create();
+        $this->category = Category::factory()->create();
 
         $this->user = User::factory()->create();
-        $this->productPopo = new ProductPopo($this->user->id);
+        $this->productPopo = new ProductPopo(
+            'test',
+            'test',
+            100,
+            100,
+            $this->category->id
+        );
     }
 
     public function test_index_method()
@@ -71,10 +84,15 @@ class ProductServiceTest extends TestCase
     {
         $updatedProduct = $this->productService->update($this->productPopo, $this->product);
 
-        $this->assertEquals($this->user->id, $updatedProduct->user_id);
+        $this->assertEquals($this->product->id, $updatedProduct->id);
+        $this->assertEquals($this->product->name, $updatedProduct->name);
+        $this->assertEquals($this->product->price, $updatedProduct->price);
+        $this->assertEquals($this->product->stock, $updatedProduct->stock);
+        $this->assertEquals($this->product->description, $updatedProduct->description);
+        $this->assertEquals($this->product->category(), $updatedProduct->category());
     }
 
-    public function testDelete()
+    public function test_delete_method()
     {
         $result = $this->productService->delete($this->product);
 
@@ -82,11 +100,15 @@ class ProductServiceTest extends TestCase
         $this->assertNull(Product::find($this->product->id));
     }
 
-    public function testStore()
+    public function test_store_method()
     {
         $product = $this->productService->store($this->productPopo);
 
         $this->assertInstanceOf(Product::class, $product);
-        $this->assertEquals($this->user->id, $product->user_id);
+        $this->assertEquals($this->productPopo->name, $product->name);
+        $this->assertEquals($this->productPopo->price, $product->price);
+        $this->assertEquals($this->productPopo->stock, $product->stock);
+        $this->assertEquals($this->productPopo->description, $product->description);
+        $this->assertEquals($this->productPopo->category_id, $product->category_id);
     }
 }

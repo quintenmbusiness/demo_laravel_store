@@ -68,7 +68,7 @@ class CartRepositoryTest extends TestCase
         $this->assertEquals($this->user->id, $updatedCart->user_id);
     }
 
-    public function testDelete()
+    public function test_delete_method()
     {
         $result = $this->cartRepository->delete($this->cart);
 
@@ -76,7 +76,7 @@ class CartRepositoryTest extends TestCase
         $this->assertNull(Cart::find($this->cart->id));
     }
 
-    public function testStore()
+    public function test_store_method()
     {
         $cart = $this->cartRepository->store($this->cartPopo);
 

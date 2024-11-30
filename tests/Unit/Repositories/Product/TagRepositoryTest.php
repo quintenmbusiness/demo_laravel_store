@@ -62,7 +62,7 @@ class TagRepositoryTest extends TestCase
         $this->assertEquals($this->tagPopo->name, $updatedTag->name);
     }
 
-    public function testDelete()
+    public function test_delete_method()
     {
         $result = $this->tagRepository->delete($this->tag);
 
@@ -70,7 +70,7 @@ class TagRepositoryTest extends TestCase
         $this->assertNull(Tag::find($this->tag->id));
     }
 
-    public function testStore()
+    public function test_store_method()
     {
         $tag = $this->tagRepository->store($this->tagPopo);
 

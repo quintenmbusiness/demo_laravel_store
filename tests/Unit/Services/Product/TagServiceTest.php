@@ -71,10 +71,10 @@ class TagServiceTest extends TestCase
     {
         $updatedTag = $this->tagService->update($this->tagPopo, $this->tag);
 
-        $this->assertEquals($this->user->id, $updatedTag->user_id);
+        $this->assertEquals($this->tag->user_id, $updatedTag->user_id);
     }
 
-    public function testDelete()
+    public function test_delete_method()
     {
         $result = $this->tagService->delete($this->tag);
 
@@ -82,11 +82,11 @@ class TagServiceTest extends TestCase
         $this->assertNull(Tag::find($this->tag->id));
     }
 
-    public function testStore()
+    public function test_store_method()
     {
         $tag = $this->tagService->store($this->tagPopo);
 
         $this->assertInstanceOf(Tag::class, $tag);
-        $this->assertEquals($this->user->id, $tag->user_id);
+        $this->assertEquals($this->tag->user_id, $tag->user_id);
     }
 }
