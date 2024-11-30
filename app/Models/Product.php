@@ -23,6 +23,10 @@ class Product extends Model
         'category_id',
     ];
 
+    protected $with = [
+        'category',
+    ];
+
     /**
      * @return BelongsTo
      */
