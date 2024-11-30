@@ -2,10 +2,13 @@
 
 namespace Database\Seeders;
 
+use App\Models\Order\Order;
+use App\Models\Product\Category;
+use App\Models\Product\Product;
+use App\Models\Product\Tag;
+use App\Models\User\Review;
 use App\Models\User\User;
 use Illuminate\Database\Seeder;
-
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class DatabaseSeeder extends Seeder
 {
@@ -15,15 +18,15 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         User::factory()->create([
-            'name'  => 'Test User',
-            'email' => 'test@example.com',
+            'name'  => 'quinten',
+            'email' => 'quintenmbusiness@gmail.com',
         ]);
 
-        \App\Models\User\User::factory(10)->create();
-        \App\Models\Product\Category::factory(5)->create();
-        \App\Models\Product\Tag::factory(10)->create();
-        \App\Models\Product\Product::factory(20)->create();
-        \App\Models\Order\Order::factory(10)->create();
-        User\Review::factory(50)->create();
+        User::factory(10)->create();
+        Category::factory(5)->create();
+        Tag::factory(10)->create();
+        Product::factory(20)->create();
+        Order::factory(10)->create();
+        Review::factory(50)->create();
     }
 }
