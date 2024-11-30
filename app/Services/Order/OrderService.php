@@ -2,8 +2,8 @@
 
 namespace App\Services\Order;
 
-use App\Models\Order;
-use App\Popo\OrderPopo;
+use App\Models\Order\Order;
+use App\Popo\Order\OrderPopo;
 use App\Repositories\Order\OrderRepository;
 use Illuminate\Database\Eloquent\Collection;
 

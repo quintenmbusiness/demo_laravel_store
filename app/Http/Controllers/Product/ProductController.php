@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Product;
 
-use App\Http\Requests\Product\DeleteTagRequest;
-use App\Http\Requests\Product\IndexTagRequest;
-use App\Http\Requests\Product\ShowTagRequest;
-use App\Http\Requests\Product\StoreTagRequest;
-use App\Http\Requests\Product\UpdateTagRequest;
-use App\Models\Product;
+use App\Http\Requests\Product\DeleteProductRequest;
+use App\Http\Requests\Product\IndexProductRequest;
+use App\Http\Requests\Product\ShowProductRequest;
+use App\Http\Requests\Product\StoreProductRequest;
+use App\Http\Requests\Product\UpdateProductRequest;
+use App\Models\Product\Product;
 use App\Services\Product\ProductService;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Routing\Controller;
@@ -28,49 +28,49 @@ class ProductController extends Controller
     }
 
     /**
-     * @param IndexTagRequest $request
+     * @param IndexProductRequest $request
      * @return Collection
      */
-    public function index(IndexTagRequest $request): Collection
+    public function index(IndexProductRequest $request): Collection
     {
         return $this->productService->index();
     }
 
     /**
-     * @param ShowTagRequest $request
+     * @param ShowProductRequest $request
      * @param Product $product
      * @return Product
      */
-    public function show(ShowTagRequest $request, Product $product): Product
+    public function show(ShowProductRequest $request, Product $product): Product
     {
         return $this->productService->show($product);
     }
 
     /**
-     * @param UpdateTagRequest $request
+     * @param UpdateProductRequest $request
      * @param Product $product
      * @return Product
      */
-    public function update(UpdateTagRequest $request, Product $product): Product
+    public function update(UpdateProductRequest $request, Product $product): Product
     {
         return $this->productService->store($request->toPopo());
     }
 
     /**
-     * @param DeleteTagRequest $request
+     * @param DeleteProductRequest $request
      * @param Product $product
      * @return bool
      */
-    public function delete(DeleteTagRequest $request, Product $product): bool
+    public function delete(DeleteProductRequest $request, Product $product): bool
     {
         return $this->productService->delete($product);
     }
 
     /**
-     * @param  StoreTagRequest $request
+     * @param  StoreProductRequest $request
      * @return Product
      */
-    public function store(StoreTagRequest $request): Product
+    public function store(StoreProductRequest $request): Product
     {
         return $this->productService->store($request->toPopo());
     }

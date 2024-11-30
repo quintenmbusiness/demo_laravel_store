@@ -2,7 +2,7 @@
 
 namespace Models;
 
-use App\Models\Product;
+use App\Models\Product\Product;
 use Tests\Unit\Models\BaseModelTest;
 
 class ProductTest extends BaseModelTest

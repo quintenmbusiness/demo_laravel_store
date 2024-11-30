@@ -2,7 +2,7 @@
 
 namespace Models;
 
-use App\Models\Tag;
+use App\Models\Product\Tag;
 use Tests\Unit\Models\BaseModelTest;
 
 class TagTest extends BaseModelTest

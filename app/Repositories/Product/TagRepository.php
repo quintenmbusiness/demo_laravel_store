@@ -2,8 +2,8 @@
 
 namespace App\Repositories\Product;
 
-use App\Models\Tag;
-use App\Popo\TagPopo;
+use App\Models\Product\Tag;
+use App\Popo\Product\TagPopo;
 use Illuminate\Database\Eloquent\Collection;
 
 class TagRepository
@@ -44,9 +44,6 @@ class TagRepository
         $tag->update(
             [
                 'name'        => $tagPopo->name,
-                'price'       => $tagPopo->price,
-                'stock'       => $tagPopo->stock,
-                'category_id' => $tagPopo->category_id,
             ]
         );
 
@@ -62,9 +59,6 @@ class TagRepository
         return Tag::create(
             [
                 'name'        => $tagPopo->name,
-                'price'       => $tagPopo->price,
-                'stock'       => $tagPopo->stock,
-                'category_id' => $tagPopo->category_id,
             ]
         );
     }

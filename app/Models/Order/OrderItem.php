@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Order;
 
+use App\Models\Product\Product;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class CartItem extends Model
+class OrderItem extends Model
 {
     use HasFactory;
 
@@ -14,17 +15,18 @@ class CartItem extends Model
      * @inheritdoc
      */
     protected $fillable = [
-        'cart_id',
+        'order_id',
         'product_id',
         'quantity',
+        'price',
     ];
 
     /**
      * @return BelongsTo
      */
-    public function cart(): BelongsTo
+    public function order(): BelongsTo
     {
-        return $this->belongsTo(Cart::class, 'cart_id');
+        return $this->belongsTo(Order::class);
     }
 
     /**

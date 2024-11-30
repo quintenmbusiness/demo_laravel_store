@@ -2,9 +2,9 @@
 
 namespace App\Services\Product;
 
-use App\Models\Category;
-use App\Popo\CategoryPopo;
-use App\Repositories\Category\CategoryRepository;
+use App\Models\Product\Category;
+use App\Popo\Product\CategoryPopo;
+use App\Repositories\Product\CategoryRepository;
 use Illuminate\Database\Eloquent\Collection;
 
 class CategoryService

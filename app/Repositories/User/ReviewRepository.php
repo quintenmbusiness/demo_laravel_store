@@ -2,8 +2,8 @@
 
 namespace App\Repositories\User;
 
-use App\Models\Review;
-use App\Popo\ReviewPopo;
+use App\Models\User\Review;
+use App\Popo\User\ReviewPopo;
 use Illuminate\Database\Eloquent\Collection;
 
 class ReviewRepository
@@ -43,10 +43,10 @@ class ReviewRepository
     {
         $review->update(
             [
-                'name'        => $reviewPopo->name,
-                'price'       => $reviewPopo->price,
-                'stock'       => $reviewPopo->stock,
-                'category_id' => $reviewPopo->category_id,
+                'user_id'        => $reviewPopo->user_id,
+                'comment'       => $reviewPopo->comment,
+                'product_id'       => $reviewPopo->product_id,
+                'rating' => $reviewPopo->rating,
             ]
         );
 
@@ -61,10 +61,10 @@ class ReviewRepository
     {
         return Review::create(
             [
-                'name'        => $reviewPopo->name,
-                'price'       => $reviewPopo->price,
-                'stock'       => $reviewPopo->stock,
-                'category_id' => $reviewPopo->category_id,
+                'user_id'        => $reviewPopo->user_id,
+                'comment'       => $reviewPopo->comment,
+                'product_id'       => $reviewPopo->product_id,
+                'rating' => $reviewPopo->rating,
             ]
         );
     }

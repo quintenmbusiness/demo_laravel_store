@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Requests\Product;
+namespace App\Http\Requests\User;
 
 use App\Popo\ProductPopo;
+use App\Popo\User\UserPopo;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateUserRequest extends FormRequest
@@ -13,27 +14,23 @@ class UpdateUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'        => ['required', 'string'],
-            'description' => ['required', 'string'],
-            'price'       => ['required', 'numeric'],
-            'stock'       => ['required', 'numeric'],
-            'category_id' => ['required', 'exists:categories,id'],
+            'name'              => ['required', 'string'],
+            'email'             => ['required', 'email'],
+            'password'          => ['required', 'string'],
         ];
     }
 
     /**
-     * @return ProductPopo
+     * @return UserPopo
      */
-    public function toPopo(): ProductPopo
+    public function toPopo(): UserPopo
     {
         $validated = $this->validated();
 
-        return new ProductPopo(
+        return new UserPopo(
             (string) $validated['name'],
-            (string) $validated['description'],
-            (float) $validated['price'],
-            (int) $validated['stock'],
-            (int) $validated['category_id'],
+            (string) $validated['email'],
+            (string) $validated['password'],
         );
     }
 }

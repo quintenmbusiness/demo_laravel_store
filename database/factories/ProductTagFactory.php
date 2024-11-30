@@ -2,9 +2,9 @@
 
 namespace Database\Factories;
 
-use App\Models\Product;
-use App\Models\ProductTag;
-use App\Models\Tag;
+use App\Models\Product\Product;
+use App\Models\Product\ProductTag;
+use App\Models\Product\Tag;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**

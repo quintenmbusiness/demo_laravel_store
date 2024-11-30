@@ -2,7 +2,7 @@
 
 namespace Models;
 
-use App\Models\RoleUser;
+use App\Models\User\RoleUser;
 use Tests\Unit\Models\BaseModelTest;
 
 class RoleUserTest extends BaseModelTest

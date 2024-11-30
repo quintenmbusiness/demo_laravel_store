@@ -2,55 +2,76 @@
 
 namespace App\Http\Controllers\Product;
 
-use App\Http\Requests\Product\StoreTagRequest;
-use App\Models\Product;
-use App\Services\Product\ProductService;
+use App\Http\Requests\Product\Tag\DeleteTagRequest;
+use App\Http\Requests\Product\Tag\IndexTagRequest;
+use App\Http\Requests\Product\Tag\ShowTagRequest;
+use App\Http\Requests\Product\Tag\StoreTagRequest;
+use App\Http\Requests\Product\Tag\UpdateTagRequest;
+use App\Models\Product\Tag;
+use App\Services\Product\TagService;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Routing\Controller;
 
 class TagController extends Controller
 {
     /**
-     * @var ProductService
+     * @var TagService
      */
-    private ProductService $productService;
+    private TagService $tagService;
 
     /**
-     * @param ProductService $productService
+     * @param TagService $tagService
      */
-    public function __construct(ProductService $productService)
+    public function __construct(TagService $tagService)
     {
-        $this->productService = $productService;
+        $this->tagService = $tagService;
     }
 
-    public function index(): Collection
+    /**
+     * @param IndexTagRequest $request
+     * @return Collection
+     */
+    public function index(IndexTagRequest $request): Collection
     {
-        return Product::all();
+        return $this->tagService->index();
     }
 
-    public function show(Product $product): Product
+    /**
+     * @param ShowTagRequest $request
+     * @param Tag $tag
+     * @return Tag
+     */
+    public function show(ShowTagRequest $request, Tag $tag): Tag
     {
-        return $product;
+        return $this->tagService->show($tag);
     }
 
-    public function update(StoreTagRequest $request, Product $product): Product
+    /**
+     * @param UpdateTagRequest $request
+     * @param Tag $tag
+     * @return Tag
+     */
+    public function update(UpdateTagRequest $request, Tag $tag): Tag
     {
-        $product->update($request->validated());
-
-        return $product->fresh();
+        return $this->tagService->update($request->toPopo(), $tag);
     }
 
-    public function destroy(Product $product): bool
+    /**
+     * @param DeleteTagRequest $request
+     * @param Tag $tag
+     * @return bool
+     */
+    public function delete(DeleteTagRequest $request, Tag $tag): bool
     {
-        return $product->delete();
+        return $this->tagService->delete($tag);
     }
 
     /**
      * @param  StoreTagRequest $request
-     * @return Product
+     * @return Tag
      */
-    public function store(StoreTagRequest $request): Product
+    public function store(StoreTagRequest $request): Tag
     {
-        return Product::create($request->validated());
+        return $this->tagService->store($request->toPopo());
     }
 }

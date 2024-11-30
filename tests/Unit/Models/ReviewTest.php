@@ -2,7 +2,7 @@
 
 namespace Models;
 
-use App\Models\Review;
+use App\Models\User\Review;
 use Tests\Unit\Models\BaseModelTest;
 
 class ReviewTest extends BaseModelTest

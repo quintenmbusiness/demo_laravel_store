@@ -2,9 +2,9 @@
 
 namespace App\Services\User;
 
-use App\Models\Cart;
-use App\Popo\CartPopo;
-use App\Repositories\Cart\CartRepository;
+use App\Models\User\Cart;
+use App\Popo\User\CartPopo;
+use App\Repositories\User\CartRepository;
 use Illuminate\Database\Eloquent\Collection;
 
 class CartService

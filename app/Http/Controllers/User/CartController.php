@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Http\Requests\Product\DeleteTagRequest;
-use App\Http\Requests\Product\IndexTagRequest;
-use App\Http\Requests\Product\ShowTagRequest;
-use App\Http\Requests\Product\StoreTagRequest;
-use App\Http\Requests\Product\UpdateTagRequest;
-use App\Models\Cart;
+use App\Http\Requests\User\Cart\DeleteCartRequest;
+use App\Http\Requests\User\Cart\IndexCartRequest;
+use App\Http\Requests\User\Cart\ShowCartRequest;
+use App\Http\Requests\User\Cart\StoreCartRequest;
+use App\Http\Requests\User\Cart\UpdateCartRequest;
+use App\Models\User\Cart;
 use App\Services\User\CartService;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Routing\Controller;
@@ -28,49 +28,49 @@ class CartController extends Controller
     }
 
     /**
-     * @param IndexTagRequest $request
+     * @param IndexCartRequest $request
      * @return Collection
      */
-    public function index(IndexTagRequest $request): Collection
+    public function index(IndexCartRequest $request): Collection
     {
         return $this->cartService->index();
     }
 
     /**
-     * @param ShowTagRequest $request
+     * @param ShowCartRequest $request
      * @param Cart $cart
      * @return Cart
      */
-    public function show(ShowTagRequest $request, Cart $cart): Cart
+    public function show(ShowCartRequest $request, Cart $cart): Cart
     {
         return $this->cartService->show($cart);
     }
 
     /**
-     * @param UpdateTagRequest $request
+     * @param UpdateCartRequest $request
      * @param Cart $cart
      * @return Cart
      */
-    public function update(UpdateTagRequest $request, Cart $cart): Cart
+    public function update(UpdateCartRequest $request, Cart $cart): Cart
     {
-        return $this->cartService->store($request->toPopo());
+        return $this->cartService->update($request->toPopo(), $cart);
     }
 
     /**
-     * @param DeleteTagRequest $request
+     * @param DeleteCartRequest $request
      * @param Cart $cart
      * @return bool
      */
-    public function delete(DeleteTagRequest $request, Cart $cart): bool
+    public function delete(DeleteCartRequest $request, Cart $cart): bool
     {
         return $this->cartService->delete($cart);
     }
 
     /**
-     * @param  StoreTagRequest $request
+     * @param  StoreCartRequest $request
      * @return Cart
      */
-    public function store(StoreTagRequest $request): Cart
+    public function store(StoreCartRequest $request): Cart
     {
         return $this->cartService->store($request->toPopo());
     }

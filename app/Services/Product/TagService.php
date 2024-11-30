@@ -2,9 +2,9 @@
 
 namespace App\Services\Product;
 
-use App\Models\Tag;
-use App\Popo\TagPopo;
-use App\Repositories\Tag\TagRepository;
+use App\Models\Product\Tag;
+use App\Popo\Product\TagPopo;
+use App\Repositories\Product\TagRepository;
 use Illuminate\Database\Eloquent\Collection;
 
 class TagService

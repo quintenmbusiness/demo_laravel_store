@@ -2,8 +2,8 @@
 
 namespace App\Repositories\Product;
 
-use App\Models\Category;
-use App\Popo\CategoryPopo;
+use App\Models\Product\Category;
+use App\Popo\Product\CategoryPopo;
 use Illuminate\Database\Eloquent\Collection;
 
 class CategoryRepository
@@ -44,9 +44,6 @@ class CategoryRepository
         $category->update(
             [
                 'name'        => $categoryPopo->name,
-                'price'       => $categoryPopo->price,
-                'stock'       => $categoryPopo->stock,
-                'category_id' => $categoryPopo->category_id,
             ]
         );
 
@@ -62,9 +59,6 @@ class CategoryRepository
         return Category::create(
             [
                 'name'        => $categoryPopo->name,
-                'price'       => $categoryPopo->price,
-                'stock'       => $categoryPopo->stock,
-                'category_id' => $categoryPopo->category_id,
             ]
         );
     }

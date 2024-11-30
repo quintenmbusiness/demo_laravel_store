@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Requests\Product;
+namespace App\Http\Requests\User\Role;
 
-use App\Popo\ProductPopo;
+use App\Popo\User\RolePopo;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreRoleRequest extends FormRequest
@@ -14,26 +14,18 @@ class StoreRoleRequest extends FormRequest
     {
         return [
             'name'        => ['required', 'string'],
-            'description' => ['required', 'string'],
-            'price'       => ['required', 'numeric'],
-            'stock'       => ['required', 'numeric'],
-            'category_id' => ['required', 'exists:categories,id'],
         ];
     }
 
     /**
-     * @return ProductPopo
+     * @return RolePopo
      */
-    public function toPopo(): ProductPopo
+    public function toPopo(): RolePopo
     {
         $validated = $this->validated();
 
-        return new ProductPopo(
-            (string) $validated['name'],
-            (string) $validated['description'],
-            (float) $validated['price'],
-            (int) $validated['stock'],
-            (int) $validated['category_id'],
+        return new RolePopo(
+            (string) $validated['name']
         );
     }
 }

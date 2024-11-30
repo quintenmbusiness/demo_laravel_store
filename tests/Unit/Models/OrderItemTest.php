@@ -2,7 +2,7 @@
 
 namespace Models;
 
-use App\Models\OrderItem;
+use App\Models\Order\OrderItem;
 use Tests\Unit\Models\BaseModelTest;
 
 class OrderItemTest extends BaseModelTest

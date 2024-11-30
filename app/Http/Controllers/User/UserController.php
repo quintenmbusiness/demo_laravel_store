@@ -2,55 +2,76 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Http\Requests\Product\StoreTagRequest;
-use App\Models\Product;
-use App\Services\Product\ProductService;
+use App\Http\Requests\User\DeleteUserRequest;
+use App\Http\Requests\User\IndexUserRequest;
+use App\Http\Requests\User\ShowUserRequest;
+use App\Http\Requests\User\StoreUserRequest;
+use App\Http\Requests\User\UpdateUserRequest;
+use App\Models\User\User;
+use App\Services\User\UserService;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Routing\Controller;
 
 class UserController extends Controller
 {
     /**
-     * @var ProductService
+     * @var UserService
      */
-    private ProductService $productService;
+    private UserService $userService;
 
     /**
-     * @param ProductService $productService
+     * @param UserService $userService
      */
-    public function __construct(ProductService $productService)
+    public function __construct(UserService $userService)
     {
-        $this->productService = $productService;
-    }
-
-    public function index(): Collection
-    {
-        return Product::all();
-    }
-
-    public function show(Product $product): Product
-    {
-        return $product;
-    }
-
-    public function update(StoreTagRequest $request, Product $product): Product
-    {
-        $product->update($request->validated());
-
-        return $product->fresh();
-    }
-
-    public function destroy(Product $product): bool
-    {
-        return $product->delete();
+        $this->userService = $userService;
     }
 
     /**
-     * @param  StoreTagRequest $request
-     * @return Product
+     * @param IndexUserRequest $request
+     * @return Collection
      */
-    public function store(StoreTagRequest $request): Product
+    public function index(IndexUserRequest $request): Collection
     {
-        return Product::create($request->validated());
+        return $this->userService->index();
+    }
+
+    /**
+     * @param ShowUserRequest $request
+     * @param User $user
+     * @return User
+     */
+    public function show(ShowUserRequest $request, User $user): User
+    {
+        return $this->userService->show($user);
+    }
+
+    /**
+     * @param UpdateUserRequest $request
+     * @param User $user
+     * @return User
+     */
+    public function update(UpdateUserRequest $request, User $user): User
+    {
+        return $this->userService->update($request->toPopo(), $user);
+    }
+
+    /**
+     * @param DeleteUserRequest $request
+     * @param User $user
+     * @return bool
+     */
+    public function delete(DeleteUserRequest $request, User $user): bool
+    {
+        return $this->userService->delete($user);
+    }
+
+    /**
+     * @param  StoreUserRequest $request
+     * @return User
+     */
+    public function store(StoreUserRequest $request): User
+    {
+        return $this->userService->store($request->toPopo());
     }
 }

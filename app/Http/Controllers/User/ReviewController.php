@@ -2,55 +2,76 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Http\Requests\Product\StoreTagRequest;
-use App\Models\Product;
-use App\Services\Product\ProductService;
+use App\Http\Requests\User\Review\DeleteReviewRequest;
+use App\Http\Requests\User\Review\IndexReviewRequest;
+use App\Http\Requests\User\Review\ShowReviewRequest;
+use App\Http\Requests\User\Review\StoreReviewRequest;
+use App\Http\Requests\User\Review\UpdateReviewRequest;
+use App\Models\User\Review;
+use App\Services\User\ReviewService;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Routing\Controller;
 
 class ReviewController extends Controller
 {
     /**
-     * @var ProductService
+     * @var ReviewService
      */
-    private ProductService $productService;
+    private ReviewService $reviewService;
 
     /**
-     * @param ProductService $productService
+     * @param ReviewService $reviewService
      */
-    public function __construct(ProductService $productService)
+    public function __construct(ReviewService $reviewService)
     {
-        $this->productService = $productService;
-    }
-
-    public function index(): Collection
-    {
-        return Product::all();
-    }
-
-    public function show(Product $product): Product
-    {
-        return $product;
-    }
-
-    public function update(StoreTagRequest $request, Product $product): Product
-    {
-        $product->update($request->validated());
-
-        return $product->fresh();
-    }
-
-    public function destroy(Product $product): bool
-    {
-        return $product->delete();
+        $this->reviewService = $reviewService;
     }
 
     /**
-     * @param  StoreTagRequest $request
-     * @return Product
+     * @param IndexReviewRequest $request
+     * @return Collection
      */
-    public function store(StoreTagRequest $request): Product
+    public function index(IndexReviewRequest $request): Collection
     {
-        return Product::create($request->validated());
+        return $this->reviewService->index();
+    }
+
+    /**
+     * @param ShowReviewRequest $request
+     * @param Review $review
+     * @return Review
+     */
+    public function show(ShowReviewRequest $request, Review $review): Review
+    {
+        return $this->reviewService->show($review);
+    }
+
+    /**
+     * @param UpdateReviewRequest $request
+     * @param Review $review
+     * @return Review
+     */
+    public function update(UpdateReviewRequest $request, Review $review): Review
+    {
+        return $this->reviewService->update($request->toPopo(), $review);
+    }
+
+    /**
+     * @param DeleteReviewRequest $request
+     * @param Review $review
+     * @return bool
+     */
+    public function delete(DeleteReviewRequest $request, Review $review): bool
+    {
+        return $this->reviewService->delete($review);
+    }
+
+    /**
+     * @param  StoreReviewRequest $request
+     * @return Review
+     */
+    public function store(StoreReviewRequest $request): Review
+    {
+        return $this->reviewService->store($request->toPopo());
     }
 }

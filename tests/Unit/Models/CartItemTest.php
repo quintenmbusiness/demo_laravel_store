@@ -2,7 +2,7 @@
 
 namespace Models;
 
-use App\Models\CartItem;
+use App\Models\User\CartItem;
 use Tests\Unit\Models\BaseModelTest;
 
 class CartItemTest extends BaseModelTest

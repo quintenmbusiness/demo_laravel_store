@@ -2,8 +2,8 @@
 
 namespace App\Repositories\Product;
 
-use App\Models\Product;
-use App\Popo\ProductPopo;
+use App\Models\Product\Product;
+use App\Popo\Product\ProductPopo;
 use Illuminate\Database\Eloquent\Collection;
 
 class ProductRepository

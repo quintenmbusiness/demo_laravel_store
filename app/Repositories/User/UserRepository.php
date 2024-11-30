@@ -2,8 +2,8 @@
 
 namespace App\Repositories\User;
 
-use App\Models\User;
-use App\Popo\UserPopo;
+use App\Models\User\User;
+use App\Popo\User\UserPopo;
 use Illuminate\Database\Eloquent\Collection;
 
 class UserRepository
@@ -44,9 +44,8 @@ class UserRepository
         $user->update(
             [
                 'name'        => $userPopo->name,
-                'price'       => $userPopo->price,
-                'stock'       => $userPopo->stock,
-                'category_id' => $userPopo->category_id,
+                'email'       => $userPopo->email,
+                'email_verified_at'       => $userPopo->email_verified_at,
             ]
         );
 
@@ -62,9 +61,8 @@ class UserRepository
         return User::create(
             [
                 'name'        => $userPopo->name,
-                'price'       => $userPopo->price,
-                'stock'       => $userPopo->stock,
-                'category_id' => $userPopo->category_id,
+                'email'       => $userPopo->email,
+                'email_verified_at'       => $userPopo->email_verified_at,
             ]
         );
     }

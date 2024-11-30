@@ -14,8 +14,9 @@ class UpdateReviewRequest extends FormRequest
     {
         return [
             'product_id'    => ['required', 'exists:products,id'],
-            'cart_id'       => ['required', 'exists:carts,id'],
-            'quantity'      => ['required', 'integer', 'min:1'],
+            'user_id'       => ['required', 'exists:users,id'],
+            'comment'       => ['required', 'string'],
+            'rating'      => ['required', 'integer', 'min:0'],
         ];
     }
 
@@ -28,8 +29,9 @@ class UpdateReviewRequest extends FormRequest
 
         return new ReviewPopo(
             (int) $validated['product_id'],
-            (int) $validated['cart_id'],
-            (int) $validated['quantity'],
+            (int) $validated['user_id'],
+            (int) $validated['rating'],
+            (string) $validated['comment']
         );
     }
 }

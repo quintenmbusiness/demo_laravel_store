@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests\User\Cart;
 
-use App\Popo\ProductPopo;
 use App\Popo\User\CartPopo;
 use Illuminate\Foundation\Http\FormRequest;
 

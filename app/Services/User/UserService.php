@@ -2,8 +2,8 @@
 
 namespace App\Services\User;
 
-use App\Models\User;
-use App\Popo\UserPopo;
+use App\Models\User\User;
+use App\Popo\User\UserPopo;
 use App\Repositories\User\UserRepository;
 use Illuminate\Database\Eloquent\Collection;
 

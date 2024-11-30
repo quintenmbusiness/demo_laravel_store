@@ -2,8 +2,8 @@
 
 namespace App\Repositories\User;
 
-use App\Models\Cart;
-use App\Popo\CartPopo;
+use App\Models\User\Cart;
+use App\Popo\User\CartPopo;
 use Illuminate\Database\Eloquent\Collection;
 
 class CartRepository
@@ -43,10 +43,7 @@ class CartRepository
     {
         $cart->update(
             [
-                'name'        => $cartPopo->name,
-                'price'       => $cartPopo->price,
-                'stock'       => $cartPopo->stock,
-                'category_id' => $cartPopo->category_id,
+                'user_id' => $cartPopo->user_id,
             ]
         );
 
@@ -61,10 +58,7 @@ class CartRepository
     {
         return Cart::create(
             [
-                'name'        => $cartPopo->name,
-                'price'       => $cartPopo->price,
-                'stock'       => $cartPopo->stock,
-                'category_id' => $cartPopo->category_id,
+                'user_id'        => $cartPopo->user_id,
             ]
         );
     }

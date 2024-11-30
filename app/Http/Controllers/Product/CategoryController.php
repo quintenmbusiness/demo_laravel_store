@@ -2,55 +2,76 @@
 
 namespace App\Http\Controllers\Product;
 
-use App\Http\Requests\Product\StoreTagRequest;
-use App\Models\Product;
-use App\Services\Product\ProductService;
+use App\Http\Requests\Product\Category\DeleteCategoryRequest;
+use App\Http\Requests\Product\Category\IndexCategoryRequest;
+use App\Http\Requests\Product\Category\ShowCategoryRequest;
+use App\Http\Requests\Product\Category\StoreCategoryRequest;
+use App\Http\Requests\Product\Category\UpdateCategoryRequest;
+use App\Models\Product\Category;
+use App\Services\Product\CategoryService;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Routing\Controller;
 
 class CategoryController extends Controller
 {
     /**
-     * @var ProductService
+     * @var CategoryService
      */
-    private ProductService $productService;
+    private CategoryService $categoryService;
 
     /**
-     * @param ProductService $productService
+     * @param CategoryService $categoryService
      */
-    public function __construct(ProductService $productService)
+    public function __construct(CategoryService $categoryService)
     {
-        $this->productService = $productService;
-    }
-
-    public function index(): Collection
-    {
-        return Product::all();
-    }
-
-    public function show(Product $product): Product
-    {
-        return $product;
-    }
-
-    public function update(StoreTagRequest $request, Product $product): Product
-    {
-        $product->update($request->validated());
-
-        return $product->fresh();
-    }
-
-    public function destroy(Product $product): bool
-    {
-        return $product->delete();
+        $this->categoryService = $categoryService;
     }
 
     /**
-     * @param  StoreTagRequest $request
-     * @return Product
+     * @param IndexCategoryRequest $request
+     * @return Collection
      */
-    public function store(StoreTagRequest $request): Product
+    public function index(IndexCategoryRequest $request): Collection
     {
-        return Product::create($request->validated());
+        return $this->categoryService->index();
+    }
+
+    /**
+     * @param ShowCategoryRequest $request
+     * @param Category $category
+     * @return Category
+     */
+    public function show(ShowCategoryRequest $request, Category $category): Category
+    {
+        return $this->categoryService->show($category);
+    }
+
+    /**
+     * @param UpdateCategoryRequest $request
+     * @param Category $category
+     * @return Category
+     */
+    public function update(UpdateCategoryRequest $request, Category $category): Category
+    {
+        return $this->categoryService->update($request->toPopo(), $category);
+    }
+
+    /**
+     * @param DeleteCategoryRequest $request
+     * @param Category $category
+     * @return bool
+     */
+    public function delete(DeleteCategoryRequest $request, Category $category): bool
+    {
+        return $this->categoryService->delete($category);
+    }
+
+    /**
+     * @param  StoreCategoryRequest $request
+     * @return Category
+     */
+    public function store(StoreCategoryRequest $request): Category
+    {
+        return $this->categoryService->store($request->toPopo());
     }
 }

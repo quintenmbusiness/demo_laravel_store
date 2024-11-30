@@ -2,9 +2,9 @@
 
 namespace App\Services\User;
 
-use App\Models\Review;
-use App\Popo\ReviewPopo;
-use App\Repositories\Review\ReviewRepository;
+use App\Models\User\Review;
+use App\Popo\User\ReviewPopo;
+use App\Repositories\User\ReviewRepository;
 use Illuminate\Database\Eloquent\Collection;
 
 class ReviewService

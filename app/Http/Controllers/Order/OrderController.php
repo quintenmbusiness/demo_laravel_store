@@ -7,7 +7,7 @@ use App\Http\Requests\Order\IndexOrderRequest;
 use App\Http\Requests\Order\ShowOrderRequest;
 use App\Http\Requests\Order\StoreOrderRequest;
 use App\Http\Requests\Order\UpdateOrderRequest;
-use App\Models\Order;
+use App\Models\Order\Order;
 use App\Services\Order\OrderService;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Routing\Controller;
@@ -53,7 +53,7 @@ class OrderController extends Controller
      */
     public function update(UpdateOrderRequest $request, Order $order): Order
     {
-        return $this->orderService->store($request->toPopo());
+        return $this->orderService->update($request->toPopo(), $order);
     }
 
     /**

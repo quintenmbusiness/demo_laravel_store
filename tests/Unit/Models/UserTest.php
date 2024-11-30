@@ -2,7 +2,7 @@
 
 namespace Tests\Unit\Models;
 
-use App\Models\User;
+use App\Models\User\User;
 
 class UserTest extends BaseModelTest
 {

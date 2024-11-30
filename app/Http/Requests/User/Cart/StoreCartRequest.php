@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\User\Cart;
 
+use App\Popo\User\CartPopo;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreCartRequest extends FormRequest

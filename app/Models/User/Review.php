@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\User;
 
+use App\Models\Product\Product;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Order extends Model
+class Review extends Model
 {
     use HasFactory;
 
@@ -15,17 +15,18 @@ class Order extends Model
      * @inheritdoc
      */
     protected $fillable = [
+        'product_id',
         'user_id',
-        'total',
-        'status',
+        'rating',
+        'comment',
     ];
 
     /**
-     * @return HasMany
+     * @return BelongsTo
      */
-    public function items(): HasMany
+    public function product(): BelongsTo
     {
-        return $this->hasMany(OrderItem::class);
+        return $this->belongsTo(Product::class);
     }
 
     /**

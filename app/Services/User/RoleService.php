@@ -2,9 +2,7 @@
 
 namespace App\Services\User;
 
-use App\Models\Role;
-use App\Popo\RolePopo;
-use App\Repositories\Role\RoleRepository;
+use App\Models\User\Role;
 use Illuminate\Database\Eloquent\Collection;
 
 class RoleService
