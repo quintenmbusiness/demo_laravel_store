@@ -6,8 +6,7 @@ permissions:
 on:
   push:
     branches:
-      - master
-      - development
+      - main
   pull_request:
 
 jobs:
