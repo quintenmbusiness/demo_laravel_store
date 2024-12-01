@@ -3,7 +3,7 @@
 namespace Models\Product;
 
 use App\Models\Product\Category;
-use Tests\Unit\Models\BaseModelTest;
+use Tests\BaseModelTest;
 
 class CategoryTest extends BaseModelTest
 {

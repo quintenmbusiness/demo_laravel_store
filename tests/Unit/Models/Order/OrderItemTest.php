@@ -3,7 +3,7 @@
 namespace Models\Order;
 
 use App\Models\Order\OrderItem;
-use Tests\Unit\Models\BaseModelTest;
+use Tests\BaseModelTest;
 
 class OrderItemTest extends BaseModelTest
 {

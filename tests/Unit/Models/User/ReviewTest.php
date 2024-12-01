@@ -3,7 +3,7 @@
 namespace Models\User;
 
 use App\Models\User\Review;
-use Tests\Unit\Models\BaseModelTest;
+use Tests\BaseModelTest;
 
 class ReviewTest extends BaseModelTest
 {

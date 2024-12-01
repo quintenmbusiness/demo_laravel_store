@@ -1,10 +1,9 @@
 <?php
 
-namespace Tests\Unit\Models;
+namespace Tests;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
 
 class BaseModelTest extends TestCase
 {

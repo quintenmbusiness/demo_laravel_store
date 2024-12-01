@@ -3,7 +3,7 @@
 namespace Models\User;
 
 use App\Models\User\CartItem;
-use Tests\Unit\Models\BaseModelTest;
+use Tests\BaseModelTest;
 
 class CartItemTest extends BaseModelTest
 {

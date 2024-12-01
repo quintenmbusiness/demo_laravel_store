@@ -3,7 +3,7 @@
 namespace Models\Product;
 
 use App\Models\Product\Tag;
-use Tests\Unit\Models\BaseModelTest;
+use Tests\BaseModelTest;
 
 class TagTest extends BaseModelTest
 {

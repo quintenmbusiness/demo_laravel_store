@@ -3,7 +3,7 @@
 namespace Models\User;
 
 use App\Models\User\User;
-use Tests\Unit\Models\BaseModelTest;
+use Tests\BaseModelTest;
 
 class UserTest extends BaseModelTest
 {

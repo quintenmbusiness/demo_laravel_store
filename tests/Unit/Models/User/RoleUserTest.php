@@ -3,7 +3,7 @@
 namespace Models\User;
 
 use App\Models\User\RoleUser;
-use Tests\Unit\Models\BaseModelTest;
+use Tests\BaseModelTest;
 
 class RoleUserTest extends BaseModelTest
 {
