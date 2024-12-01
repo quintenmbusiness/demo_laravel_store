@@ -26,6 +26,18 @@ class CartService
     /**
      * View the current cart items.
      *
+     * @param CartItemPopo $popo
+     * @param string $sessionId
+     * @return void
+     */
+    public function setCartItemQuantity(CartItemPopo $popo, string $sessionId): void
+    {
+        $this->cartRepository->setCartItemQuantity($popo, $sessionId);
+    }
+
+    /**
+     * View the current cart items.
+     *
      * @param string $sessionId
      * @return Cart
      */

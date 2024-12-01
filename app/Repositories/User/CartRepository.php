@@ -60,6 +60,24 @@ class CartRepository
      * @param string $sessionId
      * @return void
      */
+    public function setCartItemQuantity(CartItemPopo $cartItemPopo, string $sessionId): void
+    {
+        $cart = Cart::firstOrCreate(
+            ['session_id' => $sessionId],
+            ['user_id' => auth()->id()]
+        );
+
+        $cart->items()->updateOrCreate(
+            ['product_id' => $cartItemPopo->product_id],
+            ['quantity' => $cartItemPopo->quantity]
+        );
+    }
+
+    /**
+     * @param CartItemPopo $cartItemPopo
+     * @param string $sessionId
+     * @return void
+     */
     public function addCartItem(CartItemPopo $cartItemPopo, string $sessionId): void
     {
         $cart = Cart::firstOrCreate(

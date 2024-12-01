@@ -16,6 +16,7 @@ Route::prefix('/cart')->group(function () {
     Route::get('/', [CartController::class, 'viewCartItems'])->name('cart.view');
     Route::get('/clear', [CartController::class, 'clearCart'])->name('cart.clear');
     Route::post('/add', [CartController::class, 'addCartItem'])->name('cart.add');
+    Route::post('/seet', [CartController::class, 'setCartItemQuantity'])->name('cart.set');
     Route::post('/remove', [CartController::class, 'removeCartItem'])->name('cart.remove');
 });
 

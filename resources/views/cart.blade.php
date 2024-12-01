@@ -29,18 +29,20 @@
                         </td>
                         <td class="px-4 py-2">${{ number_format($item->product->price, 2) }}</td>
                         <td class="px-4 py-2">
-                            <form action="{{ route('cart.update', $item->id) }}" method="POST">
+                            <form action="{{ route('cart.set') }}" method="POST">
                                 @csrf
-                                @method('PUT')
+                                @method('POST')
+                                <input type="hidden" name="product_id" value="{{ $item->product_id }}" class="w-16 border rounded text-center px-2 py-1" min="1">
                                 <input type="number" name="quantity" value="{{ $item->quantity }}" class="w-16 border rounded text-center px-2 py-1" min="1">
                                 <button type="submit" class="text-blue-500 hover:underline ml-2">Update</button>
                             </form>
                         </td>
                         <td class="px-4 py-2">${{ number_format($item->product->price * $item->quantity, 2) }}</td>
                         <td class="px-4 py-2">
-                            <form action="{{ route('cart.remove', $item->id) }}" method="POST">
+                            <form action="{{ route('cart.remove') }}" method="POST">
                                 @csrf
-                                @method('DELETE')
+                                @method('POST')
+                                <input type="hidden" name="product_id" value="{{ $item->product_id }}">
                                 <button type="submit" class="text-red-500 hover:underline">Remove</button>
                             </form>
                         </td>

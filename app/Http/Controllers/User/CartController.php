@@ -5,12 +5,13 @@ namespace App\Http\Controllers\User;
 use App\Http\Requests\User\Cart\AddItemToCartRequest;
 use App\Http\Requests\User\Cart\ClearCartRequest;
 use App\Http\Requests\User\Cart\RemoveItemFromCartRequest;
+use App\Http\Requests\User\Cart\SetItemQuantityInCartRequest as SetItemQuantityInCartRequestAlias;
 use App\Http\Requests\User\Cart\ViewCartRequest;
 use App\Models\User\Cart;
 use App\Services\User\CartService;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Controller;
-use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 
 class CartController extends Controller
@@ -32,13 +33,11 @@ class CartController extends Controller
      * View the current cart items.
      *
      * @param ViewCartRequest $request
-     * @return Cart
+     * @return View
      */
-    public function viewCartItems(ViewCartRequest $request): Cart
+    public function viewCartItems(ViewCartRequest $request): View
     {
-        $sessionId = Session::getId();
-
-        return $this->cartService->viewCartItems($sessionId);
+        return view('cart');
     }
 
     /**
@@ -50,6 +49,17 @@ class CartController extends Controller
         $sessionId = Session::getId();
 
         return $this->cartService->clearCart($sessionId);
+    }
+
+    /**
+     * @param SetItemQuantityInCartRequestAlias $request
+     * @return RedirectResponse
+     */
+    public function setCartItemQuantity(SetItemQuantityInCartRequestAlias $request): RedirectResponse
+    {
+        $this->cartService->setCartItemQuantity($request->toPopo(), Session::getId());
+
+        return redirect()->back();
     }
 
     /**
