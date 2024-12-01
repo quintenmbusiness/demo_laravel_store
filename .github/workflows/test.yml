@@ -98,15 +98,6 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           path-to-lcov: coverage.xml
 
-  publish-coverage:
-    name: Publish Coverage to GitHub Pages
-    runs-on: ubuntu-latest
-    needs: phpunit
-
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
-
       - name: Publish Coverage Report
         uses: peaceiris/actions-gh-pages@v3
         with:
