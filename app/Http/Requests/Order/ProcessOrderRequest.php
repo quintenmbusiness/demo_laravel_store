@@ -5,7 +5,7 @@ namespace App\Http\Requests\Order;
 use App\Popo\Order\OrderPopo;
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreOrderRequest extends FormRequest
+class ProcessOrderRequest extends FormRequest
 {
     /**
      * @return array
@@ -13,9 +13,8 @@ class StoreOrderRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'user_id'   => ['required','exists:users,id'],
-            'total'     => ['required', 'float'],
-            'status'    => ['required', 'string'],
+            'address' => 'required|string|max:255',
+            'payment_method' => 'required|string',
         ];
     }
 

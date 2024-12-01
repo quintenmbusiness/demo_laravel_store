@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Http\Requests\User\Cart\DeleteCartRequest;
-use App\Http\Requests\User\Cart\IndexCartRequest;
-use App\Http\Requests\User\Cart\ShowCartRequest;
-use App\Http\Requests\User\Cart\StoreCartRequest;
-use App\Http\Requests\User\Cart\UpdateCartRequest;
+use App\Http\Requests\User\Cart\AddItemToCartRequest;
+use App\Http\Requests\User\Cart\ClearCartRequest;
+use App\Http\Requests\User\Cart\RemoveItemFromCartRequest;
+use App\Http\Requests\User\Cart\SetItemQuantityInCartRequest as SetItemQuantityInCartRequestAlias;
+use App\Http\Requests\User\Cart\ViewCartRequest;
 use App\Models\User\Cart;
 use App\Services\User\CartService;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Session;
 
 class CartController extends Controller
 {
@@ -28,50 +30,57 @@ class CartController extends Controller
     }
 
     /**
-     * @param IndexCartRequest $request
-     * @return Collection
+     * View the current cart items.
+     *
+     * @param ViewCartRequest $request
+     * @return View
      */
-    public function index(IndexCartRequest $request): Collection
+    public function viewCartItems(ViewCartRequest $request): View
     {
-        return $this->cartService->index();
+        return view('cart');
     }
 
     /**
-     * @param ShowCartRequest $request
-     * @param Cart $cart
+     * @param ClearCartRequest $request
      * @return Cart
      */
-    public function show(ShowCartRequest $request, Cart $cart): Cart
+    public function clearCart(ClearCartRequest $request): Cart
     {
-        return $this->cartService->show($cart);
+        $sessionId = Session::getId();
+
+        return $this->cartService->clearCart($sessionId);
     }
 
     /**
-     * @param UpdateCartRequest $request
-     * @param Cart $cart
-     * @return Cart
+     * @param SetItemQuantityInCartRequestAlias $request
+     * @return RedirectResponse
      */
-    public function update(UpdateCartRequest $request, Cart $cart): Cart
+    public function setCartItemQuantity(SetItemQuantityInCartRequestAlias $request): RedirectResponse
     {
-        return $this->cartService->update($request->toPopo(), $cart);
+        $this->cartService->setCartItemQuantity($request->toPopo(), Session::getId());
+
+        return redirect()->back();
     }
 
     /**
-     * @param DeleteCartRequest $request
-     * @param Cart $cart
-     * @return bool
+     * @param RemoveItemFromCartRequest $request
+     * @return RedirectResponse
      */
-    public function delete(DeleteCartRequest $request, Cart $cart): bool
+    public function removeCartItem(RemoveItemFromCartRequest $request): RedirectResponse
     {
-        return $this->cartService->delete($cart);
+        $this->cartService->removeCartItem($request->toPopo(), Session::getId());
+
+        return redirect()->back();
     }
 
     /**
-     * @param  StoreCartRequest $request
-     * @return Cart
-     */
-    public function store(StoreCartRequest $request): Cart
+     * @param  AddItemToCartRequest $request
+     * @return RedirectResponse
+ */
+    public function addCartItem(AddItemToCartRequest $request): RedirectResponse
     {
-        return $this->cartService->store($request->toPopo());
+        $this->cartService->addCartItem($request->toPopo(), Session::getId());
+
+        return redirect()->back();
     }
 }

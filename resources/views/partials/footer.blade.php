@@ -9,17 +9,13 @@
                 <h4 class="text-white font-bold mb-4">Quick Links</h4>
                 <ul class="space-y-2">
                     <li><a href="{{ url('/') }}" class="hover:underline">Home</a></li>
-                    <li><a href="{{ url('/shop') }}" class="hover:underline">Shop</a></li>
-                    <li><a href="{{ url('/about') }}" class="hover:underline">About Us</a></li>
-                    <li><a href="{{ url('/contact') }}" class="hover:underline">Contact</a></li>
+                    <li><a href="{{ url('/products') }}" class="hover:underline">Shop</a></li>
                 </ul>
             </div>
             <div>
                 <h4 class="text-white font-bold mb-4">Customer Service</h4>
                 <ul class="space-y-2">
-                    <li><a href="{{ url('/faq') }}" class="hover:underline">FAQs</a></li>
-                    <li><a href="{{ url('/returns') }}" class="hover:underline">Returns</a></li>
-                    <li><a href="{{ url('/shipping') }}" class="hover:underline">Shipping</a></li>
+
                 </ul>
             </div>
             <div>

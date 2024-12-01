@@ -6,6 +6,8 @@ use App\Models\Order\Order;
 use App\Popo\Order\OrderPopo;
 use App\Repositories\Order\OrderRepository;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 
 class OrderService
 {
@@ -23,47 +25,43 @@ class OrderService
     }
 
     /**
-     * @return Collection
+     * Handle checkout and create an order.
+     *
+     * @param  Request  $request
+     * @return RedirectResponse
      */
-    public function index(): Collection
+    public function processCheckout(Request $request)
     {
-        return $this->orderRepository->index();
-    }
+        $request->validate([
+            'address' => 'required|string|max:255',
+            'payment_method' => 'required|string',
+        ]);
 
-    /**
-     * @param Order $order
-     * @return Order
-     */
-    public function show(Order $order): Order
-    {
-        return $this->orderRepository->show($order);
-    }
+        $cart = $this->cartRepository->viewCartItems(session()->getId());
 
-    /**
-     * @param OrderPopo $orderPopo
-     * @param Order $order
-     * @return Order
-     */
-    public function update(OrderPopo $orderPopo, Order $order): Order
-    {
-        return $this->orderRepository->update($orderPopo, $order);
-    }
+        if ($cart->items->isEmpty()) {
+            return redirect()->route('cart')->with('error', 'Your cart is empty.');
+        }
 
-    /**
-     * @param Order $order
-     * @return bool
-     */
-    public function delete(Order $order): bool
-    {
-        return $this->orderRepository->delete($order);
-    }
+        $order = Order::create([
+            'user_id' => Auth::id(),
+            'address' => $request->input('address'),
+            'payment_method' => $request->input('payment_method'),
+            'total' => $cart->total,
+        ]);
 
-    /**
-     * @param OrderPopo $popo
-     * @return Order
-     */
-    public function store(OrderPopo $popo): Order
-    {
-        return $this->orderRepository->store($popo);
+        foreach ($cart->items as $item) {
+            OrderItem::create([
+                'order_id' => $order->id,
+                'product_id' => $item->product_id,
+                'quantity' => $item->quantity,
+                'price' => $item->product->price,
+            ]);
+        }
+
+        // Clear the cart after checkout
+        $cart->items()->delete();
+
+        return redirect()->route('orders')->with('success', 'Your order has been placed.');
     }
 }

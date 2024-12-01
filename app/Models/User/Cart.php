@@ -14,7 +14,14 @@ class Cart extends Model
     /**
      * @inheritdoc
      */
-    protected $fillable = ['user_id'];
+    protected $fillable = [
+        'session_id',
+        'user_id'
+    ];
+
+    protected $with = [
+        'items'
+    ];
 
     /**
      * @return HasMany<CartItem, Cart>
@@ -30,5 +37,17 @@ class Cart extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Get the total value of the cart.
+     *
+     * @return float
+     */
+    public function getTotalAttribute(): float
+    {
+        return $this->items->sum(function ($item) {
+            return $item->product->price * $item->quantity;
+        });
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\User;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\User\DeleteUserRequest;
 use App\Http\Requests\User\IndexUserRequest;

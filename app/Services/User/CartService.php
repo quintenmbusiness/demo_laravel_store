@@ -3,6 +3,7 @@
 namespace App\Services\User;
 
 use App\Models\User\Cart;
+use App\Popo\User\CartItemPopo;
 use App\Popo\User\CartPopo;
 use App\Repositories\User\CartRepository;
 use Illuminate\Database\Eloquent\Collection;
@@ -23,47 +24,54 @@ class CartService
     }
 
     /**
-     * @return Collection
+     * View the current cart items.
+     *
+     * @param CartItemPopo $popo
+     * @param string $sessionId
+     * @return void
      */
-    public function index(): Collection
+    public function setCartItemQuantity(CartItemPopo $popo, string $sessionId): void
     {
-        return $this->cartRepository->index();
+        $this->cartRepository->setCartItemQuantity($popo, $sessionId);
     }
 
     /**
-     * @param Cart $cart
+     * View the current cart items.
+     *
+     * @param string $sessionId
      * @return Cart
      */
-    public function show(Cart $cart): Cart
+    public function viewCartItems(string $sessionId): Cart
     {
-        return $this->cartRepository->show($cart);
+        return $this->cartRepository->viewCartItems($sessionId);
     }
 
     /**
-     * @param CartPopo $cartPopo
-     * @param Cart $cart
+     * @param string $sessionId
      * @return Cart
      */
-    public function update(CartPopo $cartPopo, Cart $cart): Cart
+    public function clearCart(string $sessionId): Cart
     {
-        return $this->cartRepository->update($cartPopo, $cart);
+        return $this->cartRepository->clearCart($sessionId);
     }
 
     /**
-     * @param Cart $cart
-     * @return bool
+     * @param CartItemPopo $popo
+     * @param string $sessionId
+     * @return void
      */
-    public function delete(Cart $cart): bool
+    public function removeCartItem(CartItemPopo $popo, string $sessionId): void
     {
-        return $this->cartRepository->delete($cart);
+        $this->cartRepository->removeCartItem($popo, $sessionId);
     }
 
     /**
-     * @param CartPopo $popo
-     * @return Cart
+     * @param CartItemPopo $popo
+     * @param string $sessionId
+     * @return void
      */
-    public function store(CartPopo $popo): Cart
+    public function addCartItem(CartItemPopo $popo, string $sessionId): void
     {
-        return $this->cartRepository->store($popo);
+        $this->cartRepository->addCartItem($popo, $sessionId);
     }
 }

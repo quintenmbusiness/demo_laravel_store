@@ -9,8 +9,8 @@ use App\Http\Requests\Product\StoreProductRequest;
 use App\Http\Requests\Product\UpdateProductRequest;
 use App\Models\Product\Product;
 use App\Services\Product\ProductService;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Routing\Controller;
+use \Illuminate\Contracts\View\View;
 
 class ProductController extends Controller
 {
@@ -29,21 +29,23 @@ class ProductController extends Controller
 
     /**
      * @param IndexProductRequest $request
-     * @return Collection
+     * @return View
      */
-    public function index(IndexProductRequest $request): Collection
+    public function index(IndexProductRequest $request): View
     {
+        $products = Product::all();
+        return view('products', compact('products'));
         return $this->productService->index();
     }
 
     /**
      * @param ShowProductRequest $request
      * @param Product $product
-     * @return Product
+     * @return View
      */
-    public function show(ShowProductRequest $request, Product $product): Product
+    public function show(ShowProductRequest $request, Product $product): View
     {
-        return $this->productService->show($product);
+        return view('products.show', compact('product'));
     }
 
     /**
