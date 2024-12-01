@@ -46,20 +46,20 @@ class CartService
     /**
      * @param CartItemPopo $popo
      * @param string $sessionId
-     * @return bool
+     * @return void
      */
-    public function removeCartItem(CartItemPopo $popo, string $sessionId): bool
+    public function removeCartItem(CartItemPopo $popo, string $sessionId): void
     {
-        return $this->cartRepository->removeCartItem($popo, $sessionId);
+        $this->cartRepository->removeCartItem($popo, $sessionId);
     }
 
     /**
      * @param CartItemPopo $popo
      * @param string $sessionId
-     * @return Cart
+     * @return void
      */
-    public function addCartItem(CartItemPopo $popo, string $sessionId): Cart
+    public function addCartItem(CartItemPopo $popo, string $sessionId): void
     {
-        return $this->cartRepository->addCartItem($popo, $sessionId);
+        $this->cartRepository->addCartItem($popo, $sessionId);
     }
 }

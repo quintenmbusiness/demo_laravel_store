@@ -10,7 +10,9 @@
             </ul>
         </nav>
         <div class="flex items-center space-x-4">
-            <a href="{{ url('/cart') }}" class="hover:underline">Cart</a>
+            <a href="{{ url('/cart') }}" class="hover:underline">
+                Cart ({{ $cartItems->count() }}) - ${{ number_format($cartTotal, 2) }}
+            </a>
             <a href="{{ url('/login') }}" class="hover:underline">Login</a>
         </div>
     </div>

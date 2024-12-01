@@ -8,7 +8,9 @@ use App\Http\Requests\User\Cart\RemoveItemFromCartRequest;
 use App\Http\Requests\User\Cart\ViewCartRequest;
 use App\Models\User\Cart;
 use App\Services\User\CartService;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 
 class CartController extends Controller
@@ -52,23 +54,23 @@ class CartController extends Controller
 
     /**
      * @param RemoveItemFromCartRequest $request
-     * @return bool
+     * @return RedirectResponse
      */
-    public function removeCartItem(RemoveItemFromCartRequest $request): bool
+    public function removeCartItem(RemoveItemFromCartRequest $request): RedirectResponse
     {
-        $sessionId = Session::getId();
+        $this->cartService->removeCartItem($request->toPopo(), Session::getId());
 
-        return $this->cartService->removeCartItem($request->toPopo(), $sessionId);
+        return redirect()->back();
     }
 
     /**
      * @param  AddItemToCartRequest $request
-     * @return Cart
-     */
-    public function addCartItem(AddItemToCartRequest $request): Cart
+     * @return RedirectResponse
+ */
+    public function addCartItem(AddItemToCartRequest $request): RedirectResponse
     {
-        $sessionId = Session::getId();
+        $this->cartService->addCartItem($request->toPopo(), Session::getId());
 
-        return $this->cartService->addCartItem($request->toPopo(), $sessionId);
+        return redirect()->back();
     }
 }

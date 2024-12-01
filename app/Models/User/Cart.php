@@ -38,4 +38,16 @@ class Cart extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    /**
+     * Get the total value of the cart.
+     *
+     * @return float
+     */
+    public function getTotalAttribute(): float
+    {
+        return $this->items->sum(function ($item) {
+            return $item->product->price * $item->quantity;
+        });
+    }
 }

@@ -43,26 +43,24 @@ class CartRepository
     /**
      * @param CartItemPopo $popo
      * @param string $sessionId
-     * @return Cart
+     * @return void
      */
-    public function removeCartItem(CartItemPopo $popo, string $sessionId): Cart
+    public function removeCartItem(CartItemPopo $popo, string $sessionId): void
     {
         $cart = Cart::firstOrCreate(
             ['session_id' => $sessionId],
             ['user_id' => auth()->id()]
         );
 
-        $cart->items()->where('product_id', '=', $popo->product_id)->delete();
-
-        return $cart->refresh();
+        $cart->items->where('product_id', $popo->product_id)->first()->delete();
     }
 
     /**
      * @param CartItemPopo $cartItemPopo
      * @param string $sessionId
-     * @return Cart
+     * @return void
      */
-    public function addCartItem(CartItemPopo $cartItemPopo, string $sessionId): Cart
+    public function addCartItem(CartItemPopo $cartItemPopo, string $sessionId): void
     {
         $cart = Cart::firstOrCreate(
             ['session_id' => $sessionId],
@@ -73,7 +71,7 @@ class CartRepository
             ->where('product_id', $cartItemPopo->product_id)->value('quantity') ?? 0)
             + $cartItemPopo->quantity;
 
-        return $cart->items()->updateOrCreate(
+        $cart->items()->updateOrCreate(
             ['product_id' => $cartItemPopo->product_id],
             ['quantity' => $newQuantity]
         );
