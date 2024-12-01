@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Product;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\Product\Category\DeleteCategoryRequest;
 use App\Http\Requests\Product\Category\IndexCategoryRequest;

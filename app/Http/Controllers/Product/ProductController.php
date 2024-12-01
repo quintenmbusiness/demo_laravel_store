@@ -41,11 +41,11 @@ class ProductController extends Controller
     /**
      * @param ShowProductRequest $request
      * @param Product $product
-     * @return Product
+     * @return View
      */
-    public function show(ShowProductRequest $request, Product $product): Product
+    public function show(ShowProductRequest $request, Product $product): View
     {
-        return $this->productService->show($product);
+        return view('products.show', compact('product'));
     }
 
     /**
