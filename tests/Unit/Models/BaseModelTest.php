@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-abstract class BaseModelTest extends TestCase
+class BaseModelTest extends TestCase
 {
     use RefreshDatabase;
 
