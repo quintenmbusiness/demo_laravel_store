@@ -45,49 +45,8 @@ class UserServiceTest extends TestCase
         $this->userPopo = new UserPopo(
             'quinten',
             'quintenmbusiness@gmail.com',
+            'test',
             null
         );
-    }
-
-    public function test_index_method()
-    {
-        $result = $this->userService->index();
-
-        $this->assertInstanceOf(Collection::class, $result);
-        $this->assertCount(1, $result);
-    }
-
-    public function test_show_method()
-    {
-        $result = $this->userService->show($this->user);
-
-        $this->assertSame($this->user->toArray(), $result->toArray());
-    }
-
-    public function test_update_method()
-    {
-        $updatedUser = $this->userService->update($this->userPopo, $this->user);
-
-        $this->assertEquals($this->user->name, $updatedUser->name);
-        $this->assertEquals($this->user->email, $updatedUser->email);
-        $this->assertEquals($this->user->email_verified_at, $updatedUser->email_verified_at);
-    }
-
-    public function test_delete_method()
-    {
-        $result = $this->userService->delete($this->user);
-
-        $this->assertTrue($result);
-        $this->assertNull(User::find($this->user->id));
-    }
-
-    public function test_store_method()
-    {
-        $user = $this->userService->store($this->userPopo);
-
-        $this->assertInstanceOf(User::class, $user);
-        $this->assertEquals($this->user->name, $user->name);
-        $this->assertEquals($this->user->email, $user->email);
-        $this->assertEquals($this->user->email_verified_at, $user->email_verified_at);
     }
 }

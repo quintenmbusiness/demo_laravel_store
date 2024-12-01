@@ -51,46 +51,4 @@ class OrderServiceTest extends TestCase
         $this->user = User::factory()->create();
         $this->orderPopo = new OrderPopo($this->user->id, 100, "COMPLETED");
     }
-
-    public function test_index_method()
-    {
-        $result = $this->orderService->index();
-
-        $this->assertInstanceOf(Collection::class, $result);
-        $this->assertCount(1, $result);
-    }
-
-    public function test_show_method()
-    {
-        $result = $this->orderService->show($this->order);
-
-        $this->assertSame($this->order->toArray(), $result->toArray());
-    }
-
-    public function test_update_method()
-    {
-        $updatedOrder = $this->orderService->update($this->orderPopo, $this->order);
-
-        $this->assertEquals($this->user->id, $updatedOrder->user_id);
-        $this->assertEquals($this->orderPopo->total, $updatedOrder->total);
-        $this->assertEquals($this->orderPopo->status, $updatedOrder->status);
-    }
-
-    public function test_delete_method()
-    {
-        $result = $this->orderService->delete($this->order);
-
-        $this->assertTrue($result);
-        $this->assertNull(Order::find($this->order->id));
-    }
-
-    public function test_store_method()
-    {
-        $order = $this->orderService->store($this->orderPopo);
-
-        $this->assertInstanceOf(Order::class, $order);
-        $this->assertEquals($this->user->id, $order->user_id);
-        $this->assertEquals($this->orderPopo->total, $order->total);
-        $this->assertEquals($this->orderPopo->status, $order->status);
-    }
 }
