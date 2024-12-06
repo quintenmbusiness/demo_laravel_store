@@ -31,11 +31,11 @@ class User extends Authenticatable
     ];
 
     /**
-     * @return BelongsToMany<RoleUser, User>
+     * @return BelongsToMany<User, RoleUser>
      */
     public function roles(): BelongsToMany
     {
-        return $this->belongsToMany(RoleUser::class);
+        return $this->belongsToMany(Role::class);
     }
 
     /**

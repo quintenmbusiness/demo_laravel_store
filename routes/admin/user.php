@@ -1,14 +1,14 @@
 <?php
 
-use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\AdminDashboardController;
+use App\Http\Controllers\Admin\AdminUserController;
 use Illuminate\Support\Facades\Route;
 
-Route::prefix('users')->group(function () {
-    Route::get('/', [DashboardController::class, 'users'])->name('admin.users');
-    Route::get('/create', [UserController::class, 'create'])->name('admin.users.create'); // Show create form
-    Route::post('/create', [UserController::class, 'store'])->name('admin.users.store');  // Store new user
-    Route::get('/edit/{id}', [UserController::class, 'edit'])->name('admin.users.edit');  // Show edit form
-    Route::put('/update/{id}', [UserController::class, 'update'])->name('admin.users.update'); // Update user
-    Route::delete('/delete/{id}', [UserController::class, 'destroy'])->name('admin.users.delete'); // Delete user
+Route::prefix('admin/users')->group(function () {
+    Route::get('/', [AdminDashboardController::class, 'users'])->name('admin.users');
+    Route::get('/create', [AdminUserController::class, 'create'])->name('admin.users.create');
+    Route::post('/create', [AdminUserController::class, 'store'])->name('admin.users.store');
+    Route::get('/edit/{id}', [AdminUserController::class, 'edit'])->name('admin.users.edit');
+    Route::put('/update/{id}', [AdminUserController::class, 'update'])->name('admin.users.update');
+    Route::delete('/delete/{id}', [AdminUserController::class, 'destroy'])->name('admin.users.delete');
 });

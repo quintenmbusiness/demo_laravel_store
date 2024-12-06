@@ -12,6 +12,7 @@
             <tr>
                 <th class="px-4 py-2">ID</th>
                 <th class="px-4 py-2">Name</th>
+                <th class="px-4 py-2">Number of Products</th>
                 <th class="px-4 py-2">Actions</th>
             </tr>
             </thead>
@@ -20,6 +21,7 @@
                 <tr class="border-b">
                     <td class="px-4 py-2">{{ $category->id }}</td>
                     <td class="px-4 py-2">{{ $category->name }}</td>
+                    <td class="px-4 py-2">{{ $category->products()->count() }}</td>
                     <td class="px-4 py-2 flex space-x-2">
                         <button onclick="openEditModal({{ $category->id }})" class="bg-yellow-500 text-white px-4 py-2 rounded">Edit</button>
                         <form action="{{ route('admin.categories.delete', $category->id) }}" method="POST">
@@ -44,18 +46,6 @@
                 <div class="mb-4">
                     <label for="name" class="block text-gray-700">Name</label>
                     <input type="text" id="name" name="name" class="w-full border px-4 py-2 rounded" required>
-                </div>
-                <div class="mb-4">
-                    <label for="price" class="block text-gray-700">Price</label>
-                    <input type="number" id="price" name="price" class="w-full border px-4 py-2 rounded" required>
-                </div>
-                <div class="mb-4">
-                    <label for="stock" class="block text-gray-700">Stock</label>
-                    <input type="number" id="stock" name="stock" class="w-full border px-4 py-2 rounded" required>
-                </div>
-                <div class="mb-4">
-                    <label for="category_id" class="block text-gray-700">category_id</label>
-                    <input type="number" id="category_id" name="category_id" class="w-full border px-4 py-2 rounded" required>
                 </div>
                 <div class="flex justify-end">
                     <button type="button" onclick="closeModal()" class="bg-gray-500 text-white px-4 py-2 rounded mr-2">Cancel</button>

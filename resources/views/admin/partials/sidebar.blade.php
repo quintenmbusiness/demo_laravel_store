@@ -23,7 +23,7 @@
                 </a>
             </li>
             <li>
-                <a href="{{ route('admin.orders') }}" class="flex items-center px-4 py-2 hover:bg-gray-700">
+                <a href="{{ route('admin.orders.index') }}" class="flex items-center px-4 py-2 hover:bg-gray-700">
                     <span class="material-icons-outlined">receipt</span>
                     <span class="ml-4">Orders</span>
                 </a>

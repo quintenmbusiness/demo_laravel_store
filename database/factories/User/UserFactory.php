@@ -2,6 +2,7 @@
 
 namespace Database\Factories\User;
 
+use App\Models\User\Role;
 use App\Models\User\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
@@ -31,6 +32,20 @@ class UserFactory extends Factory
             'remember_token'    => Str::random(10),
         ];
     }
+
+    /**
+     * Assign a role to the user being created.
+     *
+     * @param Role $role
+     * @return $this
+     */
+    public function withRole(Role $role): static
+    {
+        return $this->afterCreating(function (User $user) use ($role) {
+            $user->roles()->attach($role);
+        });
+    }
+
 
     /**
      * Indicate that the model's email address should be unverified.

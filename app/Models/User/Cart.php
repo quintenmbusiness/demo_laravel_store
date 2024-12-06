@@ -24,7 +24,7 @@ class Cart extends Model
     ];
 
     /**
-     * @return HasMany<CartItem, Cart>
+     * @return HasMany<Cart, CartItem>
      */
     public function items(): HasMany
     {

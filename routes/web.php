@@ -1,10 +1,9 @@
 <?php
 
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Public\HomeController;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Route;
 
-
-use Illuminate\Support\Facades\File;
 
 $files = File::allFiles(__DIR__);
 

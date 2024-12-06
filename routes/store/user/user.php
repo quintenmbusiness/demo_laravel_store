@@ -1,12 +1,11 @@
 <?php
 
-use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\Order\OrderController;
-use App\Http\Controllers\User\ProfileController;
+use App\Http\Controllers\Public\AuthController;
 use Illuminate\Support\Facades\Route;
 
 
-Route::get('/profile', [ProfileController::class, 'index'])->name('profile')->middleware('auth');;
-Route::get('/profile/orders', [ProfileController::class, 'index'])->name('profile.orders')->middleware('auth');;
-Route::get('/settings', [ProfileController::class, 'settings'])->name('settings')->middleware('auth');;
+Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
 
+Route::post('/login', [AuthController::class, 'login'])->name('login');
+Route::post('/register', [AuthController::class, 'register'])->name('register');

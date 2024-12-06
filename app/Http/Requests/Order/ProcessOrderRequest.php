@@ -13,8 +13,8 @@ class ProcessOrderRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'address' => 'required|string|max:255',
-            'payment_method' => 'required|string',
+            'address' => ['required', 'string','max:255'],
+            'payment_method' => ['required', 'string'],
         ];
     }
 
@@ -27,8 +27,8 @@ class ProcessOrderRequest extends FormRequest
 
         return new OrderPopo (
             $validated['user_id'],
-            $validated['total'],
-            $validated['status']
+            $validated['address'],
+            $validated['payment_method']
         );
     }
 }

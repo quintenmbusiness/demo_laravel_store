@@ -3,10 +3,8 @@
 namespace Repositories\Product;
 
 use App\Models\Product\Category;
-use App\Models\User\User;
 use App\Popo\Product\CategoryPopo;
-use App\Repositories\Product\CategoryRepository;
-use App\Services\Product\CategoryService;
+use App\Repositories\Public\CategoryRepository;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;

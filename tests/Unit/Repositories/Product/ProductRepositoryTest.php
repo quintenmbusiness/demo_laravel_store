@@ -4,9 +4,8 @@ namespace Repositories\Product;
 
 use App\Models\Product\Category;
 use App\Models\Product\Product;
-use App\Models\User\User;
 use App\Popo\Product\ProductPopo;
-use App\Repositories\Product\ProductRepository;
+use App\Repositories\Public\ProductRepository;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;

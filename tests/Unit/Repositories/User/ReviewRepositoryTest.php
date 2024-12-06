@@ -6,7 +6,7 @@ use App\Models\Product\Product;
 use App\Models\User\Review;
 use App\Models\User\User;
 use App\Popo\User\ReviewPopo;
-use App\Repositories\User\ReviewRepository;
+use App\Repositories\Public\ReviewRepository;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
