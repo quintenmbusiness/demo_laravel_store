@@ -49,7 +49,11 @@ class CartRepository
             ['user_id' => auth()->id()]
         );
 
-        $cart->items->where('product_id', $popo->product_id)->first()->delete();
+        $cartItem = $cart->items->where('product_id', $popo->product_id)->first();
+
+        if($cartItem !== null) {
+            $cartItem->delete();
+        }
     }
 
     /**
