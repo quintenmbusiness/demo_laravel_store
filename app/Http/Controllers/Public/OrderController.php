@@ -32,20 +32,6 @@ class OrderController extends Controller
         $this->cartRepository = $cartRepository;
     }
 
-    public function edit(Order $order): View
-    {
-        $statuses = Order::distinct('status')->pluck('status');
-
-        return view('admin.orders.show', ['order' => $order, 'statuses' => $statuses, 'edit' => true]);
-    }
-
-    public function show(Order $order): View
-    {
-        $order->load('items.product');
-
-        return view('admin.orders.show', ['order' => $order]);
-    }
-
     /**
      * Show the checkout page.
      *

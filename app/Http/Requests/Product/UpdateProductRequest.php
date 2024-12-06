@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests\Product;
 
-use App\Popo\ProductPopo;
+use App\Popo\Product\ProductPopo;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateProductRequest extends FormRequest

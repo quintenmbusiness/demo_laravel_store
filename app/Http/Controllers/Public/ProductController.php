@@ -30,9 +30,9 @@ class ProductController extends Controller
      */
     public function index(IndexProductRequest $request): View
     {
-        $products = Product::all();
-        return view('products', compact('products'));
-        return $this->productService->index();
+        $products = $this->productService->index();
+
+        return view('products.index', compact('products'));
     }
 
     /**

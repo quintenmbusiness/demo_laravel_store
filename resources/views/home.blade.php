@@ -6,15 +6,6 @@
         <p class="text-gray-700">Find the best products at unbeatable prices.</p>
 
         <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
-            @foreach($categories as $category)
-                <div class="bg-white p-4 shadow rounded">
-                    <h2 class="text-xl font-bold">{{ $category->name }}</h2>
-                    <a href="{{ url('/categories/' . $category->id) }}" class="text-blue-500 hover:underline">View Category</a>
-                </div>
-            @endforeach
-        </div>
-
-        <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
             @foreach($products as $product)
                 <div class="bg-white p-4 shadow rounded">
                     <h2 class="text-xl font-bold">{{ $product->name }}</h2>

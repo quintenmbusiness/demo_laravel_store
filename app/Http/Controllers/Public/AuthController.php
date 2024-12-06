@@ -91,7 +91,6 @@ class AuthController extends Controller
             'password' => Hash::make($data['password']),
         ]);
 
-        // Assign default role (e.g., "user")
         $defaultRole = Role::where('name', 'user')->first();
         if ($defaultRole) {
             $user->roles()->attach($defaultRole->id);
@@ -100,21 +99,5 @@ class AuthController extends Controller
         Auth::login($user);
 
         return redirect()->route('home');
-    }
-
-    /**
-     * Handle logout request.
-     *
-     * @param Request $request
-     * @return RedirectResponse
-     */
-    public function logout(Request $request)
-    {
-        Auth::logout();
-
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-
-        return redirect('/');
     }
 }

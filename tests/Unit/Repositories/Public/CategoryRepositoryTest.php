@@ -1,6 +1,6 @@
 <?php
 
-namespace Repositories\Product;
+namespace Repositories\Public;
 
 use App\Models\Product\Category;
 use App\Popo\Product\CategoryPopo;
@@ -51,28 +51,5 @@ class CategoryRepositoryTest extends TestCase
         $result = $this->categoryRepository->show($this->category);
 
         $this->assertSame($this->category->toArray(), $result->toArray());
-    }
-
-    public function test_update_method()
-    {
-        $updatedCategory = $this->categoryRepository->update($this->categoryPopo, $this->category);
-
-        $this->assertEquals($this->category->name, $updatedCategory->name);
-    }
-
-    public function test_delete_method()
-    {
-        $result = $this->categoryRepository->delete($this->category);
-
-        $this->assertTrue($result);
-        $this->assertNull(Category::find($this->category->id));
-    }
-
-    public function test_store_method()
-    {
-        $category = $this->categoryRepository->store($this->categoryPopo);
-
-        $this->assertInstanceOf(Category::class, $category);
-        $this->assertEquals($this->categoryPopo->name, $category->name);
     }
 }
