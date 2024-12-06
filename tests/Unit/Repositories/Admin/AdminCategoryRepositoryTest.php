@@ -20,12 +20,12 @@ class AdminCategoryRepositoryTest extends TestCase
     private AdminCategoryRepository $repository;
 
     /**
-     * @var CategoryPopo
+     * @var CategoryPopo $categoryPopo
      */
     private CategoryPopo $categoryPopo;
 
     /**
-     * @var Category
+     * @var Category $category
      */
     private Category $category;
 

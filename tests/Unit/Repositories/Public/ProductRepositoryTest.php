@@ -20,17 +20,17 @@ class ProductRepositoryTest extends TestCase
     private ProductRepository $productRepository;
 
     /**
-     * @var ProductPopo
+     * @var ProductPopo $productPopo
      */
     private ProductPopo $productPopo;
 
     /**
-     * @var Product
+     * @var Product $product
      */
     private Product $product;
 
     /**
-     * @var Category
+     * @var Category $category
      */
     private Category $category;
 

@@ -5,6 +5,7 @@ namespace App\Repositories\Admin;
 use App\Models\User\User;
 use App\Popo\User\UserPopo;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Hash;
 
 class AdminUserRepository
 {
@@ -45,7 +46,6 @@ class AdminUserRepository
             [
                 'name'        => $userPopo->name,
                 'email'       => $userPopo->email,
-                'email_verified_at'       => $userPopo->email_verified_at,
             ]
         );
 
@@ -62,7 +62,7 @@ class AdminUserRepository
             [
                 'name'        => $userPopo->name,
                 'email'       => $userPopo->email,
-                'email_verified_at'       => $userPopo->email_verified_at,
+                'password'    => Hash::make($userPopo->password),
             ]
         );
     }
