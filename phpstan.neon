@@ -1,9 +1,12 @@
 includes:
-    - vendor/phpstan/phpstan/conf/bleedingEdge.neon
+    - ./vendor/nunomaduro/larastan/extension.neon
 
 parameters:
-    level: 5
+    level: 1
     paths:
         - app
     scanDirectories:
-        - vendor
+        - database/migrations
+        - routes
+
+    inferPrivatePropertyTypeFromConstructor: true

@@ -8,7 +8,6 @@ class UserPopo
         public string|null $name,
         public string|null $email,
         public string|null $password,
-        public string|null $email_verified_at,
     ) {
     }
 }

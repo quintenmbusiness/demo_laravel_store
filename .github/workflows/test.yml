@@ -66,6 +66,12 @@ jobs:
       - name: Install Dependencies
         run: composer install --prefer-dist --no-progress --no-suggest
 
+      - name: Setup Environment
+        run: cp .env.example .env
+
+      - name: Generate Application Key
+        run: php artisan key:generate
+
       - name: Run PHPUnit Tests with Coverage
         env:
           XDEBUG_MODE: coverage

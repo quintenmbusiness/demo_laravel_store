@@ -2,7 +2,7 @@
 
 namespace App\Http\Middleware;
 
-use App\Repositories\User\CartRepository;
+use App\Repositories\Public\CartRepository;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
