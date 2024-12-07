@@ -6,7 +6,6 @@ use App\Http\Requests\Product\IndexProductRequest;
 use App\Http\Requests\Product\ShowProductRequest;
 use App\Models\Product\Product;
 use App\Services\Public\ProductService;
-use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Routing\Controller;
 

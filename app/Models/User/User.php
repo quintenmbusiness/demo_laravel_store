@@ -4,7 +4,6 @@ namespace App\Models\User;
 
 use App\Models\Order\Order;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -31,14 +30,6 @@ class User extends Authenticatable
     ];
 
     /**
-     * @return BelongsToMany<User, RoleUser>
-     */
-    public function roles(): BelongsToMany
-    {
-        return $this->belongsToMany(Role::class);
-    }
-
-    /**
      * @return HasMany
      */
     public function orders(): HasMany
@@ -52,13 +43,5 @@ class User extends Authenticatable
     public function cart(): HasOne
     {
         return $this->hasOne(Cart::class);
-    }
-
-    /**
-     * @return HasMany
-     */
-    public function reviews(): HasMany
-    {
-        return $this->hasMany(Review::class);
     }
 }
