@@ -1,23 +1,23 @@
 <?php
 
-namespace App\Services\Product;
+namespace App\Services\Admin;
 
 use App\Models\Product\Category;
 use App\Popo\Product\CategoryPopo;
-use App\Repositories\Public\CategoryRepository;
+use App\Repositories\Admin\AdminCategoryRepository;
 use Illuminate\Database\Eloquent\Collection;
 
 class AdminCategoryService
 {
     /**
-     * @var CategoryRepository
+     * @var AdminCategoryRepository
      */
-    private CategoryRepository $categoryRepository;
+    private AdminCategoryRepository $categoryRepository;
 
     /**
-     * @param CategoryRepository $categoryRepository
+     * @param AdminCategoryRepository $categoryRepository
      */
-    public function __construct(CategoryRepository $categoryRepository)
+    public function __construct(AdminCategoryRepository $categoryRepository)
     {
         $this->categoryRepository = $categoryRepository;
     }

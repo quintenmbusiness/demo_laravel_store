@@ -8,7 +8,7 @@ use App\Http\Requests\Product\Category\ShowCategoryRequest;
 use App\Http\Requests\Product\Category\StoreCategoryRequest;
 use App\Http\Requests\Product\Category\UpdateCategoryRequest;
 use App\Models\Product\Category;
-use App\Services\Product\AdminCategoryService;
+use App\Services\Admin\AdminCategoryService;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Routing\Controller;
 

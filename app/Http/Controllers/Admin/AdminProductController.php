@@ -8,7 +8,7 @@ use App\Http\Requests\Product\ShowProductRequest;
 use App\Http\Requests\Product\StoreProductRequest;
 use App\Http\Requests\Product\UpdateProductRequest;
 use App\Models\Product\Product;
-use App\Services\Product\AdminProductService;
+use App\Services\Admin\AdminProductService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Routing\Controller;
 

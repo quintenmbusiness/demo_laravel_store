@@ -1,23 +1,23 @@
 <?php
 
-namespace App\Services\Product;
+namespace App\Services\Admin;
 
 use App\Models\Product\Product;
 use App\Popo\Product\ProductPopo;
-use App\Repositories\Public\ProductRepository;
+use App\Repositories\Admin\AdminProductRepository;
 use Illuminate\Database\Eloquent\Collection;
 
 class AdminProductService
 {
     /**
-     * @var ProductRepository
+     * @var AdminProductRepository
      */
-    private ProductRepository $productRepository;
+    private AdminProductRepository $productRepository;
 
     /**
-     * @param ProductRepository $productRepository
+     * @param AdminProductRepository $productRepository
      */
-    public function __construct(ProductRepository $productRepository)
+    public function __construct(AdminProductRepository $productRepository)
     {
         $this->productRepository = $productRepository;
     }
