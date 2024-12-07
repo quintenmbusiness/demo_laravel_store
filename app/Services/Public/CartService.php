@@ -26,17 +26,19 @@ class CartService
      *
      * @param CartItemPopo $popo
      * @param string $sessionId
-     * @return void
+     *
+     * @return Cart
      */
-    public function setCartItemQuantity(CartItemPopo $popo, string $sessionId): void
+    public function setCartItemQuantity(CartItemPopo $popo, string $sessionId): Cart
     {
-        $this->cartRepository->setCartItemQuantity($popo, $sessionId);
+        return $this->cartRepository->setCartItemQuantity($popo, $sessionId);
     }
 
     /**
      * View the current cart items.
      *
      * @param string $sessionId
+     *
      * @return Cart
      */
     public function viewCartItems(string $sessionId): Cart
@@ -46,6 +48,7 @@ class CartService
 
     /**
      * @param string $sessionId
+     *
      * @return Cart
      */
     public function clearCart(string $sessionId): Cart
@@ -56,20 +59,22 @@ class CartService
     /**
      * @param CartItemPopo $popo
      * @param string $sessionId
-     * @return void
+     *
+     * @return Cart
      */
-    public function removeCartItem(CartItemPopo $popo, string $sessionId): void
+    public function removeCartItem(CartItemPopo $popo, string $sessionId): Cart
     {
-        $this->cartRepository->removeCartItem($popo, $sessionId);
+        return $this->cartRepository->removeCartItem($popo, $sessionId);
     }
 
     /**
      * @param CartItemPopo $popo
      * @param string $sessionId
-     * @return void
+     *
+     * @return Cart
      */
-    public function addCartItem(CartItemPopo $popo, string $sessionId): void
+    public function addCartItem(CartItemPopo $popo, string $sessionId): Cart
     {
-        $this->cartRepository->addCartItem($popo, $sessionId);
+       return $this->cartRepository->addCartItem($popo, $sessionId);
     }
 }

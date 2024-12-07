@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Order\Order;
 use App\Services\Admin\AdminOrderService;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Collection;
 use Illuminate\View\View;
 
 class AdminOrderController extends Controller
@@ -22,17 +23,9 @@ class AdminOrderController extends Controller
         $this->orderService = $orderService;
     }
 
-    public function edit(Order $order): View
+
+    public function show(Order $order): Order
     {
-        $statuses = Order::distinct('status')->pluck('status');
-
-        return view('admin.orders.show', ['order' => $order, 'statuses' => $statuses, 'edit' => true]);
-    }
-
-    public function show(Order $order): View
-    {
-        $order->load('items.product');
-
-        return view('admin.orders.show', ['order' => $order]);
+        return $order->load('items.product');
     }
 }

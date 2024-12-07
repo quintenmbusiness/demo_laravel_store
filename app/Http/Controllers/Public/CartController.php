@@ -30,25 +30,12 @@ class CartController extends Controller
     }
 
     /**
-     * View the current cart items.
-     *
-     * @param ViewCartRequest $request
-     * @return View
-     */
-    public function viewCartItems(ViewCartRequest $request): View
-    {
-        return view('cart');
-    }
-
-    /**
      * @param ClearCartRequest $request
      * @return Cart
      */
     public function clearCart(ClearCartRequest $request): Cart
     {
-        $sessionId = Session::getId();
-
-        return $this->cartService->clearCart($sessionId);
+        return $this->cartService->clearCart(Session::getId());
     }
 
     /**
@@ -57,9 +44,7 @@ class CartController extends Controller
      */
     public function setCartItemQuantity(SetItemQuantityInCartRequestAlias $request): RedirectResponse
     {
-        $this->cartService->setCartItemQuantity($request->toPopo(), Session::getId());
-
-        return redirect()->back();
+        return $this->cartService->setCartItemQuantity($request->toPopo(), Session::getId());
     }
 
     /**

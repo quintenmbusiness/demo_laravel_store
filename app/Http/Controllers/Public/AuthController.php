@@ -29,22 +29,12 @@ class AuthController extends Controller
     }
 
     /**
-     * Show the login form.
-     *
-     * @return View
-     */
-    public function showLoginForm()
-    {
-        return view('auth.login');
-    }
-
-    /**
      * Handle login request.
      *
      * @param Request $request
-     * @return RedirectResponse
+     * @return bool
      */
-    public function login(Request $request)
+    public function login(Request $request): bool
     {
         $credentials = $request->validate([
             'email' => 'required|email',
@@ -52,23 +42,10 @@ class AuthController extends Controller
         ]);
 
         if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
-            return redirect()->intended('/');
+            return $request->session()->regenerate();
         }
 
-        return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
-        ]);
-    }
-
-    /**
-     * Show the registration form.
-     *
-     * @return View
-     */
-    public function showRegisterForm()
-    {
-        return view('auth.register');
+        return false;
     }
 
     /**

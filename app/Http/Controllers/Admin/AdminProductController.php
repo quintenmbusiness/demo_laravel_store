@@ -11,6 +11,7 @@ use App\Models\Product\Product;
 use App\Services\Admin\AdminProductService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Collection;
 
 class AdminProductController extends Controller
 {
@@ -29,23 +30,22 @@ class AdminProductController extends Controller
 
     /**
      * @param IndexProductRequest $request
-     * @return View
+     *
+     * @return Collection
      */
-    public function index(IndexProductRequest $request): View
+    public function index(IndexProductRequest $request): Collection
     {
-        $products = Product::all();
-        return view('products', compact('products'));
         return $this->productService->index();
     }
 
     /**
      * @param ShowProductRequest $request
      * @param Product $product
-     * @return View
+     * @return Product
      */
-    public function show(ShowProductRequest $request, Product $product): View
+    public function show(ShowProductRequest $request, Product $product): Product
     {
-        return view('products.show', compact('product'));
+        return $this->productService->show($product);
     }
 
     /**

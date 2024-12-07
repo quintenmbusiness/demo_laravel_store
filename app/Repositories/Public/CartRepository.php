@@ -40,9 +40,10 @@ class CartRepository
     /**
      * @param CartItemPopo $popo
      * @param string $sessionId
-     * @return void
+     *
+     * @return Cart
      */
-    public function removeCartItem(CartItemPopo $popo, string $sessionId): void
+    public function removeCartItem(CartItemPopo $popo, string $sessionId): Cart
     {
         $cart = Cart::firstOrCreate(
             ['session_id' => $sessionId],
@@ -54,14 +55,17 @@ class CartRepository
         if($cartItem !== null) {
             $cartItem->delete();
         }
+
+        return $cart->refresh();
     }
 
     /**
      * @param CartItemPopo $cartItemPopo
      * @param string $sessionId
-     * @return void
+     *
+     * @return Cart
      */
-    public function setCartItemQuantity(CartItemPopo $cartItemPopo, string $sessionId): void
+    public function setCartItemQuantity(CartItemPopo $cartItemPopo, string $sessionId): Cart
     {
         $cart = Cart::firstOrCreate(
             ['session_id' => $sessionId],
@@ -72,14 +76,17 @@ class CartRepository
             ['product_id' => $cartItemPopo->product_id],
             ['quantity' => $cartItemPopo->quantity]
         );
+
+        return $cart->refresh();
     }
 
     /**
      * @param CartItemPopo $cartItemPopo
      * @param string $sessionId
-     * @return void
+     *
+     * @return Cart
      */
-    public function addCartItem(CartItemPopo $cartItemPopo, string $sessionId): void
+    public function addCartItem(CartItemPopo $cartItemPopo, string $sessionId): Cart
     {
         $cart = Cart::firstOrCreate(
             ['session_id' => $sessionId],
@@ -94,5 +101,7 @@ class CartRepository
             ['product_id' => $cartItemPopo->product_id],
             ['quantity' => $newQuantity]
         );
+
+        return $cart->refresh();
     }
 }
